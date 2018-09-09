@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "609816478989",
+    "firebase_url": "https://agritec-4e9ac.firebaseio.com",
+    "project_id": "agritec-4e9ac",
+    "storage_bucket": "agritec-4e9ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609816478989:android:405af4f7e01f6b27",
+        "android_client_info": {
+          "package_name": "com.example.haran.agritec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609816478989-ugk00chqbbhscdkjh5naeuusn50s4kfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.haran.agritec",
+            "certificate_hash": "89eb67b462ce386bf2b36ff5bce460a7ab309a23"
+          }
+        },
+        {
+          "client_id": "609816478989-olfs5rug8h9houhvg5ev1gllb9vaql3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBobhAsK4Ij_PXOoFn29RxWWJaeiPCDSVk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609816478989-olfs5rug8h9houhvg5ev1gllb9vaql3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
