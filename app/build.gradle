@@ -27,6 +27,9 @@ dependencies {
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.firebase:firebase-auth:11.0.2'
+
+    implementation 'com.google.android.gms:play-services-auth:11.0.2'
+
     implementation 'com.google.firebase:firebase-database:11.0.2'
     implementation 'com.google.firebase:firebase-storage:11.0.2'
 

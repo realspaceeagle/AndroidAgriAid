@@ -17,12 +17,13 @@
         <include
             android:id="@+id/main_page_toolbar"
             layout="@layout/app_bar_layout"
-            ></include>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"></include>
 
         <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
-            android:layout_height="511dp"
+            android:layout_height="562dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true">
 
@@ -72,7 +73,7 @@
 
         >
 
-        <include layout="@layout/navigation_header"/>
+        <!--<include layout="@layout/navigation_header"/>-->
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
