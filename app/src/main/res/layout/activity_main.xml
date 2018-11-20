@@ -17,8 +17,7 @@
         <include
             android:id="@+id/main_page_toolbar"
             layout="@layout/app_bar_layout"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"></include>
+            ></include>
 
         <FrameLayout
             android:id="@+id/main_container"
