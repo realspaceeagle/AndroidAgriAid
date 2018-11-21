@@ -1,11 +1,13 @@
 package com.example.haran.agritec;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -54,26 +56,26 @@ private String PostKey, currentUserID ,databaseUserID ,description,image;
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                 description = dataSnapshot.child("description").getValue().toString();
-                   image  = dataSnapshot.child("postimage").getValue().toString();
 
-                databaseUserID =dataSnapshot.child("uid").getValue().toString();
+                if(dataSnapshot.exists()) {
+                    description = dataSnapshot.child("description").getValue().toString();
+                    image = dataSnapshot.child("postimage").getValue().toString();
 
-
-                postDescription.setText(description);
-                Picasso.get().load(image).into(postImage);
+                    databaseUserID = dataSnapshot.child("uid").getValue().toString();
 
 
-                if(currentUserID.equals(databaseUserID))
-                {
+                    postDescription.setText(description);
+                    Picasso.get().load(image).into(postImage);
 
-                    DeletePostButton.setVisibility(View.VISIBLE);
-                    EditPostButton.setVisibility(View.VISIBLE);
+
+                    if (currentUserID.equals(databaseUserID)) {
+
+                        DeletePostButton.setVisibility(View.VISIBLE);
+                        EditPostButton.setVisibility(View.VISIBLE);
+                    }
+
+
                 }
-
-
-
-
             }
 
             @Override
@@ -84,5 +86,29 @@ private String PostKey, currentUserID ,databaseUserID ,description,image;
             }
         });
 
+        DeletePostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+                DeleteCurrentPost();
+            }
+        });
+
+    }
+
+    private void DeleteCurrentPost()
+    {
+        ClickPostRef.removeValue();
+        SendUserToMainActivity();
+
+        Toast.makeText(this,"Post has been deleted",Toast.LENGTH_SHORT).show();
+
+    }
+    private void SendUserToMainActivity()
+    {
+        Intent mainIntent =new Intent(ClickPostActivity.this,MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 }
