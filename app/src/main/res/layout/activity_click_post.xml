@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/click_post_image"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -27,7 +27,8 @@
         android:layout_marginBottom="185dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:padding="8dp"
+        android:background="@drawable/inputs"
+        android:padding="15dp"
         android:text="Post Description"
         android:textColor="@color/dark"
         android:textSize="18sp"
