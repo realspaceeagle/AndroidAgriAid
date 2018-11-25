@@ -333,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             case R.id.nav_profile:
+                SendUserToProfileActivity();
             Toast.makeText(this, "profile", Toast.LENGTH_SHORT).show();
             break;
 
@@ -410,6 +411,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void SendUserToProfileActivity()
+    {
+
+        Intent LoginIntent = new Intent(MainActivity.this,ProfileActivity.class);
+        LoginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(LoginIntent);
+        finish();
     }
 
 
