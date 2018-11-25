@@ -78,13 +78,14 @@ public class SetingsActivity extends AppCompatActivity {
         userGender = (EditText)findViewById(R.id.settings_gender);
         userRelation= (EditText)findViewById(R.id.settings_relationship_status);
         userDOB = (EditText)findViewById(R.id.settings_dob);
+        userProfImage =(CircleImageView) findViewById(R.id.settings_profile_image);
 
         loadingBar = new ProgressDialog(this);
 
-        userProfImage =(CircleImageView) findViewById(R.id.settings_profile_image);
+
 
         UpdateAccountsettingbutton=(Button) findViewById(R.id.update_account_settings_buttons);
-       locationsettingsbutton=(Button) findViewById(R.id.settings_location);
+       locationsettingsbutton=(Button) findViewById(R.id.my_profile_view_location);
 
        SettingsuserRef.addValueEventListener(new ValueEventListener() {
            @Override
