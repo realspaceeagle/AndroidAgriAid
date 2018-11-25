@@ -129,8 +129,9 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
               {
                   loadingBar.setTitle("Profile Image");
                   loadingBar.setMessage("Please wait,while we are updating your profile Image...");
-                  loadingBar.show();
                   loadingBar.setCanceledOnTouchOutside(true);
+                  loadingBar.show();
+
 
                   Uri resultUri = result.getUri();
 
