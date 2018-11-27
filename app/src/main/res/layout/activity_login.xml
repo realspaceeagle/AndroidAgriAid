@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@drawable/login_back">
+    android:background="@drawable/material_sunset2">
 
     <ImageView
         android:id="@+id/Login_icon"
@@ -13,8 +13,7 @@
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/iconagri" />
+        app:srcCompat="@drawable/logonew" />
 
     <EditText
         android:id="@+id/Login_email"
