@@ -48,15 +48,14 @@
         android:textColorHint="@color/colorProfile"/>
 
     <ImageButton
-        android:id="@+id/serch_people_friends_button"
+        android:id="@+id/search_friends_people_button"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/simpleText"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/search_box_input"
         android:background="@drawable/inputs"
-        android:src="@drawable/find"
-        />
+        android:src="@drawable/find" />
 
 </RelativeLayout>
 
