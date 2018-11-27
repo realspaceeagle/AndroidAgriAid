@@ -2,6 +2,7 @@ package com.example.haran.agritec;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -193,10 +195,18 @@ public class MainActivity extends AppCompatActivity {
     public static class PostViewHolder extends RecyclerView.ViewHolder
     {
         View mView;
+        ImageButton LikepostButton,CommentPostButton;
+        TextView DisplayNoOfLikes;
+
 
         public PostViewHolder(View itemView) {
             super(itemView);
             mView= itemView;
+
+            LikepostButton = (ImageButton)mView.findViewById(R.id.like_button);
+           CommentPostButton = (ImageButton)mView.findViewById(R.id.comment_button);
+           DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
+
         }
         public void setFullname(String fullname)
         {
