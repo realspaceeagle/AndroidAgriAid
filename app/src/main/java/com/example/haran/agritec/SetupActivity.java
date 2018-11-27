@@ -33,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SetupActivity extends AppCompatActivity {
 
-    private EditText UserName,FullName,CountryName;
+    private EditText UserName,FullName,Addressname;
     private Button SaveInformationbutton;
     private CircleImageView ProfileImage;
     private ProgressDialog loadingBar;
@@ -60,7 +60,7 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
 
         UserName =(EditText) findViewById(R.id.setup_user_name);
         FullName =(EditText) findViewById(R.id.setup_full_name);
-        CountryName =(EditText) findViewById(R.id.setup_country);
+        Addressname =(EditText) findViewById(R.id.setup_country);
         SaveInformationbutton=(Button)findViewById(R.id.setup_information_button);
         ProfileImage =(CircleImageView) findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(this);
@@ -190,7 +190,7 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
     {
         String username =UserName.getText().toString();
         String fullname =FullName.getText().toString();
-        String country =CountryName.getText().toString();
+        String address =Addressname.getText().toString();
 
         if(TextUtils.isEmpty(username))
         {
@@ -203,7 +203,7 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
             Toast.makeText(this, "please write your fullname...", Toast.LENGTH_SHORT).show();
 
         }
-        if(TextUtils.isEmpty(country))
+        if(TextUtils.isEmpty(address))
         {
             Toast.makeText(this, "please write your country...", Toast.LENGTH_SHORT).show();
 
@@ -222,11 +222,11 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
             HashMap userMap =new HashMap();
              userMap.put("username",username);
             userMap.put("fullname",fullname);
-            userMap.put("country",country);
-            userMap.put("status","Hey there i am using social network ,developed");
-            userMap.put("gender","none");
+            userMap.put("address",address);
+            userMap.put("about","Hey there i am using social network ,developed");
+            userMap.put("email","none");
             userMap.put("dob","none");
-            userMap.put("relationshipstatus","none");
+            userMap.put("phoneno","none");
             UsersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task)

@@ -2,15 +2,15 @@ package com.example.haran.agritec;
 
 public class FindFriends
 {
-    public String profileimage,fullname,status;
+    public String profileimage,fullname,about;
 
     public FindFriends()
     {}
 
-    public FindFriends(String profileimage, String fullname, String status) {
+    public FindFriends(String profileimage, String fullname, String about) {
         this.profileimage = profileimage;
         this.fullname = fullname;
-        this.status = status;
+        this.about = about;
     }
 
     public String getProfileimage() {
@@ -30,10 +30,10 @@ public class FindFriends
     }
 
     public String getStatus() {
-        return status;
+        return about;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAbout(String status) {
+        this.about = status;
     }
 }

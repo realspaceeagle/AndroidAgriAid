@@ -84,7 +84,7 @@ allUsersDatabaseRef =  FirebaseDatabase.getInstance().getReference().child("User
                 protected void populateViewHolder(FindFriendsViewViewHolder viewHolder, FindFriends model, int position)
                 {
                              viewHolder.setFullname(model.getFullname());
-                             viewHolder.setStatus(model.getStatus());
+                             viewHolder.setabout(model.getStatus());
                              viewHolder.setProfileimage(model.getProfileimage());
 
                 }
@@ -115,9 +115,9 @@ allUsersDatabaseRef =  FirebaseDatabase.getInstance().getReference().child("User
                 myName.setText(fullname);
             }
 
-            public void setStatus(String status) {
+            public void setabout(String about) {
                 TextView myStatus =(TextView)mView.findViewById(R.id.all_users_status);
-               myStatus.setText(status);
+               myStatus.setText(about);
 
             }
 

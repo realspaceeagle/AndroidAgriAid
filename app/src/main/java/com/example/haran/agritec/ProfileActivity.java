@@ -18,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView userName,userProfName,userStatus,userCountry,userGender,userRelation,userDOB;
+    private TextView userName,userProfName,userAbout,useraddress,useremail,userphoneno,userDOB;
     private CircleImageView  userProfileImage;
     private Button viewlocationsettingsbutton;
 
@@ -40,10 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         userName = (TextView) findViewById(R.id.my_profile_username);
         userProfName = (TextView)findViewById(R.id.my_profile_fullname);
-        userStatus= (TextView)findViewById(R.id.my_profile_status);
-        userCountry = (TextView)findViewById(R.id.my_profile_country);
-        userGender = (TextView)findViewById(R.id.my_profile_gender);
-        userRelation= (TextView)findViewById(R.id.my_profile_relationshipstatus);
+        userAbout= (TextView)findViewById(R.id.my_profile_status);
+        useraddress = (TextView)findViewById(R.id.my_profile_country);
+        useremail = (TextView)findViewById(R.id.my_profile_gender);
+        userphoneno= (TextView)findViewById(R.id.my_profile_relationshipstatus);
         userDOB = (TextView)findViewById(R.id.my_profile_dob);
         userProfileImage =(CircleImageView) findViewById(R.id.my_profile_pic);
         viewlocationsettingsbutton=(Button) findViewById(R.id.my_profile_view_location);
@@ -57,22 +57,22 @@ public class ProfileActivity extends AppCompatActivity {
                     String myProfileImage =dataSnapshot.child("profileimage").getValue().toString();
                     String myUserName =dataSnapshot.child("username").getValue().toString();
                     String myProfileName =dataSnapshot.child("fullname").getValue().toString();
-                    String myProfilestatus =dataSnapshot.child("status").getValue().toString();
+                    String myProfileabout =dataSnapshot.child("about").getValue().toString();
                     String myDOB =dataSnapshot.child("dob").getValue().toString();
-                    String mycountry =dataSnapshot.child("country").getValue().toString();
-                    String mygender =dataSnapshot.child("gender").getValue().toString();
-                    String myrelationshipstatus =dataSnapshot.child("relationshipstatus").getValue().toString();
+                    String myaddress =dataSnapshot.child("address").getValue().toString();
+                    String myemail =dataSnapshot.child("email").getValue().toString();
+                    String myphoneno =dataSnapshot.child("phoneno").getValue().toString();
 
 
 
                     Picasso.get().load(myProfileImage).placeholder(R.drawable.profile).into(userProfileImage);
                     userName.setText("@"+myUserName);
                     userProfName .setText(myProfileName);
-                    userStatus.setText(myProfilestatus);
+                    userAbout.setText(myProfileabout);
                     userDOB.setText("DOB:"+myDOB);
-                    userCountry.setText("Address:"+mycountry);
-                    userGender.setText("Email:"+mygender);
-                    userRelation.setText("Phone No:"+myrelationshipstatus );
+                    useraddress.setText("Address:"+myaddress);
+                    useremail.setText("Email:"+myemail);
+                    userphoneno.setText("Phone No:"+myphoneno );
 
 
 

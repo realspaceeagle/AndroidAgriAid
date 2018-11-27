@@ -62,7 +62,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/country"
         android:ems="10"
-        android:hint="Country"
+        android:hint="Address"
         android:inputType="textMultiLine"
         android:padding="14dp" />
 

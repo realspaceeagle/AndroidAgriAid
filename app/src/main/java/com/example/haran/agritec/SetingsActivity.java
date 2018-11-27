@@ -36,7 +36,7 @@ public class SetingsActivity extends AppCompatActivity {
 
     private Toolbar mToolabr;
 
-    private EditText userName,userProfName,userStatus,userCountry,userGender,userRelation,userDOB;
+    private EditText userName,userProfName,userAbout,userAddress,userEmail,userPhoneNo,userDOB;
     private Button UpdateAccountsettingbutton,locationsettingsbutton;
 
     private CircleImageView userProfImage;
@@ -73,10 +73,10 @@ public class SetingsActivity extends AppCompatActivity {
 
         userName = (EditText)findViewById(R.id.settings_username);
         userProfName = (EditText)findViewById(R.id.settings_profile_full_name);
-        userStatus= (EditText)findViewById(R.id.settings_status);
-        userCountry = (EditText)findViewById(R.id.settings_country);
-        userGender = (EditText)findViewById(R.id.settings_gender);
-        userRelation= (EditText)findViewById(R.id.settings_relationship_status);
+        userAbout= (EditText)findViewById(R.id.settings_status);
+        userAddress = (EditText)findViewById(R.id.settings_country);
+        userEmail = (EditText)findViewById(R.id.settings_gender);
+        userPhoneNo= (EditText)findViewById(R.id.settings_relationship_status);
         userDOB = (EditText)findViewById(R.id.settings_dob);
         userProfImage =(CircleImageView) findViewById(R.id.settings_profile_image);
 
@@ -96,20 +96,20 @@ public class SetingsActivity extends AppCompatActivity {
                    String myProfileImage =dataSnapshot.child("profileimage").getValue().toString();
                    String myUserName =dataSnapshot.child("username").getValue().toString();
                    String myProfileName =dataSnapshot.child("fullname").getValue().toString();
-                   String myProfilestatus =dataSnapshot.child("status").getValue().toString();
+                   String myProfileAbout =dataSnapshot.child("about").getValue().toString();
                    String myDOB =dataSnapshot.child("dob").getValue().toString();
-                   String mycountry =dataSnapshot.child("country").getValue().toString();
-                   String mygender =dataSnapshot.child("gender").getValue().toString();
-                   String myrelationshipstatus =dataSnapshot.child("relationshipstatus").getValue().toString();
+                   String myaddress =dataSnapshot.child("address").getValue().toString();
+                   String myemail =dataSnapshot.child("email").getValue().toString();
+                   String myphoneno =dataSnapshot.child("phoneno").getValue().toString();
 
                    Picasso.get().load(myProfileImage).placeholder(R.drawable.profile).into(userProfImage);
                    userName.setText(myUserName);
                    userProfName .setText(myProfileName);
-                   userStatus.setText(myProfilestatus);
+                   userAbout.setText(myProfileAbout);
                    userDOB.setText(myDOB);
-                   userCountry.setText(mycountry);
-                   userGender.setText(mygender);
-                   userRelation.setText(myrelationshipstatus );
+                   userAddress.setText( myaddress);
+                   userEmail.setText(myemail);
+                   userPhoneNo.setText( myphoneno );
 
                }
 
@@ -229,11 +229,11 @@ userProfImage.setOnClickListener(new View.OnClickListener() {
     {
        String username = userName.getText().toString();
         String Profilename = userProfName.getText().toString();
-        String status = userStatus.getText().toString();
+        String About = userAbout.getText().toString();
         String dob = userDOB.getText().toString();
-        String country = userCountry.getText().toString();
-        String gender = userGender.getText().toString();
-        String relation = userRelation.getText().toString();
+        String address = userAddress.getText().toString();
+        String email = userEmail.getText().toString();
+        String phoneno = userPhoneNo.getText().toString();
 
         if(TextUtils.isEmpty(username))
         {
@@ -244,7 +244,7 @@ userProfImage.setOnClickListener(new View.OnClickListener() {
             Toast.makeText(this,"Please write your Profilename...",Toast.LENGTH_SHORT).show();
 
         }
-        else if (TextUtils.isEmpty(status))
+        else if (TextUtils.isEmpty(About))
         {
             Toast.makeText(this,"Please write your about...",Toast.LENGTH_SHORT).show();
 
@@ -254,15 +254,15 @@ userProfImage.setOnClickListener(new View.OnClickListener() {
             Toast.makeText(this,"Please write your Date of birth ...",Toast.LENGTH_SHORT).show();
 
         }
-        else if (TextUtils.isEmpty(country))
+        else if (TextUtils.isEmpty(address))
         {
             Toast.makeText(this,"Please write your address...",Toast.LENGTH_SHORT).show();
 
-        } else if (TextUtils.isEmpty(gender))
+        } else if (TextUtils.isEmpty(email))
         {
             Toast.makeText(this,"Please write your Email...",Toast.LENGTH_SHORT).show();
 
-        } else if (TextUtils.isEmpty(relation))
+        } else if (TextUtils.isEmpty(phoneno))
         {
             Toast.makeText(this,"Please write your Phone No...",Toast.LENGTH_SHORT).show();
 
@@ -274,19 +274,19 @@ userProfImage.setOnClickListener(new View.OnClickListener() {
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-            UpdateAccountInformation(username,Profilename,status,dob,country,gender,relation);
+            UpdateAccountInformation(username,Profilename,About,dob,address,email,phoneno);
         }
     }
 
-    private void UpdateAccountInformation(String username, String profilename, String status, String dob, String country, String gender, String relation) {
+    private void UpdateAccountInformation(String username, String profilename, String About, String dob, String address, String email, String phoneno) {
         HashMap userMap = new HashMap();
         userMap.put("username", username);
         userMap.put("fullname", profilename);
-        userMap.put("status", status);
+        userMap.put("about", About);
         userMap.put("dob", dob);
-        userMap.put("country", country);
-        userMap.put("gender", gender);
-        userMap.put("relationshipstatus", relation);
+        userMap.put("address", address);
+        userMap.put("email", email);
+        userMap.put("phoneno", phoneno);
 
         SettingsuserRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
             @Override
