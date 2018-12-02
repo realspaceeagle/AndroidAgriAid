@@ -31,10 +31,13 @@
         <activity
             android:name=".SetingsActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".FindFriendsActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FindFriendsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".FarmerCommentsActivity"></activity>
     </application>
 
 </manifest>
