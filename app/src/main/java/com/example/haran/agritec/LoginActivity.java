@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button LoginButton;
     private ImageView googleSignInButton;
     private EditText UserEmail,UserPassword;
-    private TextView NeedNewAccountLink;
+    private TextView NeedNewAccountLink,ForgetPasswordlink;
     private ProgressDialog loadingBar;
 
 private FirebaseAuth mAuth;
@@ -53,6 +53,7 @@ private static final String TAG ="LoginActivity" ;
 
 
         NeedNewAccountLink = (TextView) findViewById(R.id.register_account_link);
+        ForgetPasswordlink=(TextView) findViewById(R.id.forgetpassword);
         UserEmail = (EditText) findViewById(R.id.Login_email);
         UserPassword = (EditText) findViewById(R.id.Login_password);
         LoginButton = (Button) findViewById(R.id.Login_button);
@@ -76,6 +77,16 @@ private static final String TAG ="LoginActivity" ;
 
             }
         });
+
+        ForgetPasswordlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              startActivity(new Intent (LoginActivity.this,ResetPasswordActivity.class));
+
+            }
+        });
+
+
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -104,6 +115,8 @@ signIn();
 });
 
     }
+
+
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleSignInClient);

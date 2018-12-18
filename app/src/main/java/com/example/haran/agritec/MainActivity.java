@@ -464,16 +464,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_Agro_Services:
+                SendUserToAgroServiceActivity();
                 Toast.makeText(this, "AgroServices", Toast.LENGTH_SHORT).show();
                 break;
 
 
             case R.id.nav_Agro_shops:
+                SendUserToAgroshopsActivity();
                 Toast.makeText(this, "AgroShops", Toast.LENGTH_SHORT).show();
                 break;
 
 
             case R.id.nav_BanksandInsurance:
+                SendUserToBankandInsuranceActivity();
                 Toast.makeText(this, "BanksandInsurance", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -517,6 +520,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void SendUserToBankandInsuranceActivity() {
+        Intent LoginIntent = new Intent(MainActivity.this,BankandInsuranceActivity.class);
+        startActivity(LoginIntent);
+    }
+
+    private void SendUserToAgroServiceActivity() {
+        Intent LoginIntent = new Intent(MainActivity.this,AgroServiceActivity.class);
+        startActivity(LoginIntent);
+    }
+
+    private void SendUserToAgroshopsActivity() {
+        Intent LoginIntent = new Intent(MainActivity.this,Agroshops.class);
+        startActivity(LoginIntent);
+
     }
 
     private void SendUserToFindfriendsActivity()

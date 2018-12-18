@@ -37,7 +37,21 @@
         <activity
             android:name=".FindFriendsActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".FarmerCommentsActivity"></activity>
+        <activity android:name=".FarmerCommentsActivity" />
+        <activity android:name=".Agroshops" />
+        <activity
+            android:name=".Agroshopsview"
+            android:label="@string/title_activity_agroshopsview"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".AgroshopsClickPostActivity" />
+        <activity android:name=".AgroServiceActivity" />
+        <activity android:name=".AgroServiceViewActivity" />
+        <activity android:name=".AgroServiceClickPostActivity" />
+        <activity android:name=".BankandInsuranceActivity" />
+        <activity android:name=".BankandInsuranceviewActivity" />
+        <activity android:name=".BankandInsuranceClickPostActivity" />
+        <activity android:name=".ResetPasswordActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

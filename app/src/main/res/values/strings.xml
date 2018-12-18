@@ -3,4 +3,12 @@
     <string name="profilename">ProfileName</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer close</string>
+    <string name="title_activity_agroshopsview">Agroshopsview</string>
+    <string-array name="Services">
+        <item> Transport</item>
+        <item> FertilizerService</item>
+        <item> CropServices</item>
+        <item> LaborService</item>
+        <item> Transport</item>
+    </string-array>
 </resources>
