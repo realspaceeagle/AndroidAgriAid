@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -92,14 +93,36 @@ public class Agroshopsview extends AppCompatActivity {
 //        PostsRef=FirebaseDatabase.getInstance().getReference().child("Agroshops");
 
 
-        SearchButton.setOnClickListener(new View.OnClickListener() {
+//        SearchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                SpinnerSelect = Spinner.getSelectedItem().toString();
+//                DisplayAllUserPosts(  SpinnerSelect);
+//            }
+//        });
+
+
+        Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                SpinnerSelect = Spinner.getSelectedItem().toString();
+                DisplayAllUserPosts(  SpinnerSelect);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
                 SpinnerSelect = Spinner.getSelectedItem().toString();
                 DisplayAllUserPosts(  SpinnerSelect);
             }
         });
+
+
+
+
 
 //        SpinnerSelect = Spinner.getSelectedItem().toString();
 //               DisplayAllUserPosts(  SpinnerSelect);

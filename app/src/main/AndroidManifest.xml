@@ -50,8 +50,10 @@
         <activity android:name=".BankandInsuranceActivity" />
         <activity android:name=".BankandInsuranceviewActivity" />
         <activity android:name=".BankandInsuranceClickPostActivity" />
-        <activity android:name=".ResetPasswordActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".PersonalProfileActivity"></activity>
     </application>
 
 </manifest>
