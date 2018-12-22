@@ -1,5 +1,6 @@
 package com.example.haran.agritec;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -81,11 +82,21 @@ allUsersDatabaseRef =  FirebaseDatabase.getInstance().getReference().child("User
             )
             {
                 @Override
-                protected void populateViewHolder(FindFriendsViewViewHolder viewHolder, FindFriends model, int position)
+                protected void populateViewHolder(FindFriendsViewViewHolder viewHolder, FindFriends model, final int position)
                 {
                              viewHolder.setFullname(model.getFullname());
                              viewHolder.setabout(model.getStatus());
                              viewHolder.setProfileimage(model.getProfileimage());
+
+                             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     String visit_user_id = getRef(position).getKey();
+                                     Intent profileIntent= new Intent(FindFriendsActivity.this,PersonalProfileActivity.class);
+                                     profileIntent.putExtra("visit_user_id",visit_user_id);
+                                     startActivity(profileIntent);
+                                 }
+                             });
 
                 }
             };
