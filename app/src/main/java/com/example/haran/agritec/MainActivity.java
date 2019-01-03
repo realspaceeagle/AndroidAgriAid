@@ -447,6 +447,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_friends:
+                SendUserToFriendsActivity();
                 Toast.makeText(this, "friendlist", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -501,6 +502,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             case R.id.nav_Messages:
+                SendUserToFriendsActivity();
                 Toast.makeText(this, "messages", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -520,6 +522,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void SendUserToFriendsActivity() {
+
+        Intent friendintent = new Intent(MainActivity.this,FriendsActivity.class);
+        startActivity(friendintent);
     }
 
     private void SendUserToBankandInsuranceActivity() {
