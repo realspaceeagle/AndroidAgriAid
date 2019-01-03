@@ -18,6 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonalProfileActivity extends AppCompatActivity {
@@ -26,9 +29,10 @@ public class PersonalProfileActivity extends AppCompatActivity {
     private CircleImageView userProfileImage;
     private Button viewlocationsettingsbutton,SendFriendRequestbutton,DeclineFriendRequestbutton;
 
-    private DatabaseReference FriendRequestRef,UsersRef;
+    private DatabaseReference FriendRequestRef,UsersRef,FriendsRef;
     private FirebaseAuth mAuth;
     private  String senderUserId,reciverUserId,current_state;
+    private String saveCurrentDate;
 
 
     @Override
@@ -40,6 +44,8 @@ public class PersonalProfileActivity extends AppCompatActivity {
         UsersRef= FirebaseDatabase.getInstance().getReference().child("Users");
          senderUserId=mAuth.getCurrentUser().getUid();
          FriendRequestRef=FirebaseDatabase.getInstance().getReference().child("FriendRequest");
+         FriendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
+
 
         InitializeFields();
 
@@ -100,9 +106,19 @@ public class PersonalProfileActivity extends AppCompatActivity {
                    SendFriendRequestToPerson();  
                  }
                  if(current_state.equals("request_sent"))
-                 {
-                     CancelFriendrequest();
-                 }
+                  {
+                      CancelFriendrequest();
+                  }
+
+                  if(current_state.equals("request_received"))
+                  {
+                      AcceptFriendrequest();
+                  }
+
+                  if(current_state.equals("friends"))
+                  {
+                      Unfriend();
+                  }
 
 
               }
@@ -115,6 +131,113 @@ public class PersonalProfileActivity extends AppCompatActivity {
             DeclineFriendRequestbutton.setVisibility(View.INVISIBLE);
             SendFriendRequestbutton.setVisibility(View.INVISIBLE);
         }
+
+    }
+
+    private void Unfriend()
+    {
+        FriendsRef.child(senderUserId).child(reciverUserId)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                           FriendsRef.child(reciverUserId).child(senderUserId)
+                                    .removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task)
+                                        {
+                                            if(task.isSuccessful())
+                                            {
+                                                SendFriendRequestbutton.setEnabled(true);
+                                                current_state="not_friends";
+                                                SendFriendRequestbutton.setText("Send Friend Request");
+
+
+                                                DeclineFriendRequestbutton.setVisibility(View.INVISIBLE);
+                                                DeclineFriendRequestbutton.setEnabled(false);
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+
+
+
+    }
+
+    private void AcceptFriendrequest()
+    {
+        Calendar calFordDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-YYYY");
+        saveCurrentDate = currentDate.format(calFordDate.getTime());
+
+        FriendsRef.child(senderUserId).child(reciverUserId).child("date").setValue(saveCurrentDate)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            FriendsRef.child(reciverUserId).child(senderUserId).child("date").setValue(saveCurrentDate)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task)
+                                        {
+                                            if(task.isSuccessful())
+                                            {
+                                                FriendRequestRef.child(senderUserId).child(reciverUserId)
+                                                        .removeValue()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task)
+                                                            {
+                                                                if(task.isSuccessful())
+                                                                {
+                                                                    FriendRequestRef.child(reciverUserId).child(senderUserId)
+                                                                            .removeValue()
+                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<Void> task)
+                                                                                {
+                                                                                    if(task.isSuccessful())
+                                                                                    {
+                                                                                        SendFriendRequestbutton.setEnabled(true);
+                                                                                        current_state="friends";
+                                                                                        SendFriendRequestbutton.setText("Unfriend");
+
+
+                                                                                        DeclineFriendRequestbutton.setVisibility(View.INVISIBLE);
+                                                                                        DeclineFriendRequestbutton.setEnabled(false);
+                                                                                    }
+                                                                                }
+                                                                            });
+                                                                }
+                                                            }
+                                                        });
+
+
+
+                                            }
+
+
+                                        }
+                                    });
+
+
+
+                        }
+
+
+                    }
+                });
+
+
 
     }
 
@@ -165,7 +288,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
                     {
                         if(dataSnapshot.hasChild(reciverUserId))
                         {
-                            String  request_type=dataSnapshot.child(reciverUserId).getValue().toString();
+                            String  request_type=dataSnapshot.child(reciverUserId).child("request_type").getValue().toString();
                              if(request_type.equals("sent"))
                              {
                                  current_state="request_sent";
@@ -173,6 +296,43 @@ public class PersonalProfileActivity extends AppCompatActivity {
                                  DeclineFriendRequestbutton.setVisibility(View.INVISIBLE);
                                  DeclineFriendRequestbutton.setEnabled(false);
                              }
+
+                             else if(request_type.equals("received"))
+                             {
+                              current_state="request_received";
+                              SendFriendRequestbutton.setText("Accept friend request");
+                              DeclineFriendRequestbutton.setVisibility(View.VISIBLE);
+                              DeclineFriendRequestbutton.setEnabled(true);
+
+                             }
+                        }
+
+
+                        else{
+                            FriendsRef.child(senderUserId)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot)
+                                        {
+                                            if(dataSnapshot.hasChild(reciverUserId))
+                                            {
+                                                current_state="friends";
+                                                SendFriendRequestbutton.setText("Unfriend");
+                                                DeclineFriendRequestbutton.setVisibility(View.INVISIBLE);
+                                                DeclineFriendRequestbutton.setEnabled(false);
+
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
                         }
                     }
 
