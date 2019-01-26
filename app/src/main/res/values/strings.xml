@@ -3,4 +3,5 @@
     <string name="profilename">ProfileName</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer close</string>
+    <string name="title_activity_location_set">Map</string>
 </resources>

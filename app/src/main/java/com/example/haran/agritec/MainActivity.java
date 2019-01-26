@@ -317,6 +317,8 @@ public class MainActivity extends AppCompatActivity {
             PostDescription.setText(description);
         }
 
+
+
         public void setPostimage(String postimage)
         {
             ImageView Postimage =(ImageView) mView.findViewById(R.id.post_image);
@@ -443,8 +445,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_farmer:
-                Toast.makeText(this, "farmer's page", Toast.LENGTH_SHORT).show();
-                break;
+                Intent i=new Intent(MainActivity.this,FarmersPage.class);
+                startActivity(i);
+
 
             case R.id.nav_middlemen:
                 Toast.makeText(this, "middlemen page", Toast.LENGTH_SHORT).show();
@@ -466,8 +469,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            case R.id.nav_advertisement:
-                Toast.makeText(this, "Advertisement page", Toast.LENGTH_SHORT).show();
+            case R.id.weather:
+                Toast.makeText(this, "Weather information", Toast.LENGTH_SHORT).show();
+                Intent k = new Intent(MainActivity.this,Weather.class);
+                startActivity(k);
                 break;
 
             case R.id.nav_discussionforum:
@@ -476,11 +481,18 @@ public class MainActivity extends AppCompatActivity {
 
 
             case R.id.nav_informationcenter:
-                Toast.makeText(this, "informationcenter", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information Center", Toast.LENGTH_SHORT).show();
+                Intent uuu = new Intent(MainActivity.this,InformationCenter.class);
+                startActivity(uuu);
+
                 break;
 
             case R.id.nav_feedback:
                 Toast.makeText(this, "feedback", Toast.LENGTH_SHORT).show();
+
+                Intent mm = new Intent(MainActivity.this,Feedbacks.class);
+                startActivity(mm);
+
                 break;
 
 
@@ -492,6 +504,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_Settings:
                 SendUserToSettingsActivity();
                 Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_advert:
+                SendUserToSettingsActivity();
+                Toast.makeText(this, "advertisement", Toast.LENGTH_SHORT).show();
+                Intent j = new Intent(MainActivity.this,AdvertisementPost.class);
+                startActivity(j);
                 break;
 
 

@@ -46,7 +46,7 @@ private String PostKey, currentUserID ,databaseUserID ,description,image;
 
 
         PostKey=getIntent().getExtras().get("PostKey").toString();
-        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
+        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("FarmersPage").child(PostKey);
 
 
         postImage=(ImageView) findViewById(R.id.click_post_image);

@@ -84,6 +84,16 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="68dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="35dp"
+        android:text="reset" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,8 +126,20 @@
             android:src="@drawable/google" />
 
 
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Login_icon"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="20dp"
+        android:text="Forgot Password...."
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
 
 </RelativeLayout>
