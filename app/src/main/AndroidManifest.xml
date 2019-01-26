@@ -38,25 +38,41 @@
             android:name=".FindFriendsActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".FarmerCommentsActivity" />
-        <activity android:name=".Agroshops" />
+        <activity
+            android:name=".Agroshops"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Agroshopsview"
             android:label="@string/title_activity_agroshopsview"
             android:theme="@style/AppTheme" />
         <activity android:name=".AgroshopsClickPostActivity" />
-        <activity android:name=".AgroServiceActivity" />
+        <activity
+            android:name=".AgroServiceActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".AgroServiceViewActivity" />
         <activity android:name=".AgroServiceClickPostActivity" />
-        <activity android:name=".BankandInsuranceActivity" />
+        <activity
+            android:name=".BankandInsuranceActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".BankandInsuranceviewActivity" />
         <activity android:name=".BankandInsuranceClickPostActivity" />
         <activity
             android:name=".ResetPasswordActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".PersonalProfileActivity" />
-        <activity android:name=".FriendsActivity" />
-        <activity android:name=".ChatActivity"
-            android:parentActivityName=".MainActivity" ></activity>
+        <activity
+            android:name=".PersonalProfileActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FriendsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ChatActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".InformationCenterActivity" />
+        <activity android:name=".InformationCenterViewActivity" />
+        <activity android:name=".InformationCenterClickPostActivity" />
+        <activity android:name=".InformationCenterCommentActivity" />
+        <activity android:name=".Admindeleteuser"></activity>
     </application>
 
 </manifest>

@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -34,11 +36,15 @@ public class AgroServiceViewActivity extends AppCompatActivity {
     private android.widget.ImageButton  AddNewPostButton;
 
     private FirebaseAuth mAuth;//firebase 1st
-    private DatabaseReference UsersRef ,PostsRef,LikesRef;
+    private DatabaseReference UsersRef ,PostsRef,LikesRef,Agroshopsref;
+
+    private android.widget.Spinner Spinner;
+    private String SpinnerSelect;
+    private ImageButton SearchButton;
 
 
     String currentUserID;
-    Boolean Likechecker=false;
+   // Boolean Likechecker=false;
 
 
     @Override
@@ -51,15 +57,19 @@ public class AgroServiceViewActivity extends AppCompatActivity {
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef=FirebaseDatabase.getInstance().getReference().child("AgroService");
         LikesRef=FirebaseDatabase.getInstance().getReference().child("AgroServiceLikes");
+        Agroshopsref = FirebaseDatabase.getInstance().getReference().child("AgroShops");
+
 
 
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
+        SearchButton =(ImageButton) findViewById(R.id.search_services);
         setSupportActionBar(mToolbar);//setting up home tool bar
         getSupportActionBar().setTitle("AgroServicefeed");//set title for action bar
 
 
 
-        AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
+      //  AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
+        Spinner   = findViewById(R.id.shop_view_spinner);
 
         postList =(RecyclerView) findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
@@ -70,34 +80,56 @@ public class AgroServiceViewActivity extends AppCompatActivity {
 
 
 
-
-
-
-        AddNewPostButton.setOnClickListener(new View.OnClickListener (){
+        Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v)
-            {
-                SendUserToAgroshops();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                SpinnerSelect = Spinner.getSelectedItem().toString();
+                DisplayAllUserPosts(  SpinnerSelect);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                SpinnerSelect = Spinner.getSelectedItem().toString();
+                DisplayAllUserPosts(  SpinnerSelect);
             }
         });
 
 
-        DisplayAllUserPosts();
+
+
+
+
+//        AddNewPostButton.setOnClickListener(new View.OnClickListener (){
+//            @Override
+//            public void onClick(View v)
+//            {
+//                SendUserToAgroshops();
+//            }
+//        });
+//
+//
+//        DisplayAllUserPosts();
 
     }
 
-    private void DisplayAllUserPosts()
+    private void DisplayAllUserPosts(String SpinnerSelect )
     {
 
-        Query sortPostsinDescendingOrder = PostsRef.orderByChild("Counter");
+      //  Query sortPostsinDescendingOrder = PostsRef.orderByChild("Counter");
+
+        Query ServicesQuery  =Agroshopsref.orderByChild("Services")
+                .startAt(SpinnerSelect).endAt(SpinnerSelect+ "\uf8ff");
 
         FirebaseRecyclerAdapter<agservice,PostViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<agservice, PostViewHolder>
                         (
                                 agservice.class,
-                                R.layout.all_posts_layout,
+                                R.layout.agro_service_layout,
                                 PostViewHolder.class,
-                                sortPostsinDescendingOrder
+                                ServicesQuery
                         )
                 {
                     @Override
@@ -111,9 +143,13 @@ public class AgroServiceViewActivity extends AppCompatActivity {
                         viewHolder.setDescription(model.getDescription());
                         viewHolder.setProfileimage(model.getProfileimage());
                         viewHolder.setPostimage(model.getPostimage());
+                        viewHolder.setItem_name(model.getItem_name());
+                        viewHolder.setPrice(model.getPrice());
+                        viewHolder.setOffers(model.getOffers());
+                        viewHolder.setLocation(model.getLocation());
 
 
-                        viewHolder.setLikeButtonStatus(PostKey);
+                       // viewHolder.setLikeButtonStatus(PostKey);
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -141,39 +177,39 @@ public class AgroServiceViewActivity extends AppCompatActivity {
 //                        });
 
 
-                        viewHolder.LikepostButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                Likechecker=true;
-
-                                LikesRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot)
-                                    {
-                                        if(Likechecker.equals(true))
-                                        {
-                                            if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
-                                                LikesRef.child(PostKey).child(currentUserID).removeValue();
-                                                Likechecker = false;
-                                            }
-                                            else
-                                            {
-                                                LikesRef.child(PostKey).child(currentUserID).setValue(true);
-                                                Likechecker = false;
-                                            }
-                                        }
-
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                        });
+//                        viewHolder.LikepostButton.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v)
+//                            {
+//                                Likechecker=true;
+//
+//                                LikesRef.addValueEventListener(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(DataSnapshot dataSnapshot)
+//                                    {
+//                                        if(Likechecker.equals(true))
+//                                        {
+//                                            if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
+//                                                LikesRef.child(PostKey).child(currentUserID).removeValue();
+//                                                Likechecker = false;
+//                                            }
+//                                            else
+//                                            {
+//                                                LikesRef.child(PostKey).child(currentUserID).setValue(true);
+//                                                Likechecker = false;
+//                                            }
+//                                        }
+//
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(DatabaseError databaseError) {
+//
+//                                    }
+//                                });
+//                            }
+//                        });
 
 
                     }
@@ -191,47 +227,47 @@ public class AgroServiceViewActivity extends AppCompatActivity {
         DatabaseReference LikesRef;
 
 
-        public PostViewHolder(View itemView) {
+       public PostViewHolder(View itemView) {
             super(itemView);
-            mView= itemView;
-
-            LikepostButton = (ImageButton)mView.findViewById(R.id.like_button);
-            CommentPostButton = (ImageButton)mView.findViewById(R.id.comment_button);
-            DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
-
-//            LikesRef =FirebaseDatabase.getInstance().getReference().child("FarmerLikes");
-            LikesRef =FirebaseDatabase.getInstance().getReference().child("AgroServiceLikes");
-            currentUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
+           mView= itemView;
+//
+//            LikepostButton = (ImageButton)mView.findViewById(R.id.like_button);
+//            CommentPostButton = (ImageButton)mView.findViewById(R.id.comment_button);
+//            DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
+//
+////            LikesRef =FirebaseDatabase.getInstance().getReference().child("FarmerLikes");
+//            LikesRef =FirebaseDatabase.getInstance().getReference().child("AgroServiceLikes");
+//            currentUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
 
-        public void setLikeButtonStatus(final String PostKey)
-        {
-            LikesRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
-                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
-                    {
-                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
-                        LikepostButton.setImageResource(R.drawable.like);
-                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
-                    }
-                    else
-                    {
-                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
-                        LikepostButton.setImageResource(R.drawable.dislike);
-                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-        }
+//        public void setLikeButtonStatus(final String PostKey)
+//        {
+//            LikesRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot)
+//                {
+//                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
+//                    {
+//                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
+//                        LikepostButton.setImageResource(R.drawable.like);
+//                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
+//                    }
+//                    else
+//                    {
+//                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
+//                        LikepostButton.setImageResource(R.drawable.dislike);
+//                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+//
+//        }
 
         public void setFullname(String fullname)
         {
@@ -264,6 +300,28 @@ public class AgroServiceViewActivity extends AppCompatActivity {
         {
             ImageView Postimage =(ImageView) mView.findViewById(R.id.post_image);
             Picasso.get().load(postimage).into(Postimage);
+        }
+
+        public void setItem_name(String Item_name)
+        {
+            TextView Displayname=(TextView)mView.findViewById(R.id.post_Item_name);
+            Displayname.setText(Item_name);
+        }
+        public void  setPrice(String Price)
+        {
+
+            TextView DisplayPrice=(TextView)mView.findViewById(R.id.Price);
+            DisplayPrice.setText("Price "+Price);
+        }
+        public void setOffers(String Offers)
+        {
+            TextView DisplayOffers=(TextView)mView.findViewById(R.id.Offers);
+            DisplayOffers.setText("Offers "+Offers);
+        }
+        public void setLocation(String Location)
+        {
+            TextView DisplayOffers=(TextView)mView.findViewById(R.id.post_Location);
+            DisplayOffers.setText("Location"+Location);
         }
 
     }

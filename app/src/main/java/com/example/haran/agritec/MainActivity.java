@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -49,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
     private android.widget.ImageButton  AddNewPostButton;
 
     private FirebaseAuth mAuth;//firebase 1st
-    private DatabaseReference UsersRef ,PostsRef,LikesRef;
+    private DatabaseReference UsersRef ,PostsRef,LikesRef,Adminref;
 
 
     String currentUserID;
+    String Value;
+
     Boolean Likechecker=false;
 
 
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef=FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef=FirebaseDatabase.getInstance().getReference().child("FarmerLikes");
+        Adminref=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+
 
 
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
+      //  AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
 
 
 
@@ -141,16 +146,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        AddNewPostButton.setOnClickListener(new View.OnClickListener (){
-        @Override
-        public void onClick(View v)
-        {
-        SendUserToPostActivity();
-        }
-        });
+//        AddNewPostButton.setOnClickListener(new View.OnClickListener (){
+//        @Override
+//        public void onClick(View v)
+//        {
+//        SendUserToPostActivity();
+//        }
+//        });
 
+Adminref.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+       if( dataSnapshot.hasChild("admin"))
+       {
+           showhideItem();
+       }
+       else
+       {
+           hideItem();
+       }
+
+
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
+    }
+});
 
         DisplayAllUserPosts();
+
+//if(Value.equals("true")) {
+//            showhideItem();
+//        }
+//        else
+//        {
+//
+//            hideItem();
+//        }
+    }
+
+    private void showhideItem() {
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.viewfeedback).setVisible(true);
+
+
+        nav_Menu.findItem(R.id.deleteuser).setVisible(true);
+    }
+
+    private void hideItem() {
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.viewfeedback).setVisible(false);
+        nav_Menu.findItem(R.id.deleteuser).setVisible(false);
 
     }
 
@@ -276,13 +328,13 @@ public class MainActivity extends AppCompatActivity {
                {
                   if(dataSnapshot.child(PostKey).hasChild(currentUserId))
                   {
-                      countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
+                      countLikes =(int )dataSnapshot.child(PostKey).child(currentUserId).getChildrenCount();
                        LikepostButton.setImageResource(R.drawable.like);
                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
                   }
                   else
                   {
-                      countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
+                      countLikes =(int )dataSnapshot.child(PostKey).child(currentUserId).getChildrenCount();
                       LikepostButton.setImageResource(R.drawable.dislike);
                       DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
 
@@ -431,9 +483,9 @@ public class MainActivity extends AppCompatActivity {
     private void UserMenuSelector(MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.nav_post:
-            SendUserToPostActivity();
-            break;
+//            case R.id.nav_post:
+//            SendUserToPostActivity();
+//            break;
 
 
 
@@ -465,13 +517,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_Agro_Services:
-                SendUserToAgroServiceActivity();
+               // SendUserToAgroServiceActivity();
+                SendUserToAgroshopsActivity();
                 Toast.makeText(this, "AgroServices", Toast.LENGTH_SHORT).show();
                 break;
 
 
             case R.id.nav_Agro_shops:
-                SendUserToAgroshopsActivity();
+               // SendUserToAgroshopsActivity();
+                SendUserToAgroServiceActivity();
                 Toast.makeText(this, "AgroShops", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -488,6 +542,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_discussionforum:
+                SendUserTodiscussionforumActivity();
                 Toast.makeText(this, "disussionforum", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -520,8 +575,27 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
 
+            case R.id.deleteuser:
+                // Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
+
+                SendUserTodeleteuserActivity();
+                break;
+
+
+
+
 
         }
+    }
+
+    private void SendUserTodeleteuserActivity() {
+        Intent friendintent = new Intent(MainActivity.this,Admindeleteuser.class);
+        startActivity(friendintent);
+    }
+
+    private void SendUserTodiscussionforumActivity() {
+        Intent friendintent = new Intent(MainActivity.this,InformationCenterActivity.class);
+        startActivity(friendintent);
     }
 
     private void SendUserToFriendsActivity() {

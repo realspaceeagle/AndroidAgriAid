@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,24 +40,28 @@ public class AgroServiceActivity extends AppCompatActivity {
 
     private ImageButton SelectPostImage;
     private Button UpdatePostButton, ViewAgropostButton;
-    private EditText PostDescription;
+    private EditText PostDescription,Postname,PostPrice,PostOffers, PostLocation;
+    private String Description,Item_name,Price,Offers,Location;
 
     private static final int Gallery_Pick = 1;
     private Uri ImageUri;
-    private String Description;
+    //private String Description;
+    private android.widget.Spinner Spinner;
+    private String SpinnerSelect;
 
     private StorageReference PostsimagesReference;
     private DatabaseReference UsersRef, PostsRef;
 
     private String saveCurrentDate, saveCurrentTime, postRandomName, downloadurl, current_user_id;
     private FirebaseAuth mAuth;
-    private long countPosts=0;
+  //  private long countPosts=0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agro_service);
+
         mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
 
@@ -65,12 +70,18 @@ public class AgroServiceActivity extends AppCompatActivity {
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 //        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("AgroService");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("AgroShops");
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_post_image);
         UpdatePostButton = (Button) findViewById(R.id.update_post_button);
         ViewAgropostButton = (Button) findViewById(R.id.view_post_button);
-        PostDescription = (EditText) findViewById(R.id.post_description);
+        PostDescription = (EditText) findViewById(R.id.postshop_description);
+        Spinner = findViewById(R.id.spinner_agroshops);
+        Postname = (EditText) findViewById(R.id.Item_name);
+        PostPrice = (EditText) findViewById(R.id.Price);
+        PostOffers = (EditText) findViewById(R.id.Offers);
+        PostLocation = (EditText) findViewById(R.id.Location);
+
 
         loadingBar = new ProgressDialog(this);
 
@@ -78,7 +89,7 @@ public class AgroServiceActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("AgroShop");
 
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +123,38 @@ public class AgroServiceActivity extends AppCompatActivity {
     }
 
     private void ValidatePostInfo() {
-        Description = PostDescription.getText().toString();
+       // Description = PostDescription.getText().toString();
+        Description=PostDescription.getText().toString();
+        SpinnerSelect = Spinner.getSelectedItem().toString();
+        Item_name = Postname.getText().toString();
+        Price=PostPrice.getText().toString();
+        Offers= PostOffers.getText().toString();
+        Location=PostLocation.getText().toString();
         if (ImageUri == null) {
             Toast.makeText(this, "Please select post image...", Toast.LENGTH_SHORT).show();
 
-        } else if (TextUtils.isEmpty(Description)) {
-            Toast.makeText(this, "Please say something about your image...", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(Description)) {
+           Toast.makeText(this, "Please say something about your image...", Toast.LENGTH_SHORT).show();
 
-        } else {
+       }
+        else if (TextUtils.isEmpty(Item_name)) {
+            Toast.makeText(this, "Please say something about Item_name...", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (TextUtils.isEmpty(Price)) {
+            Toast.makeText(this, "Please say something about Price...", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (TextUtils.isEmpty(Offers)) {
+            Toast.makeText(this, "Please say something about Offers...", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (TextUtils.isEmpty(Location)) {
+            Toast.makeText(this, "Please say something about Location...", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
             loadingBar.setTitle("Add New Post");
             loadingBar.setMessage("Please wait,while we are updating your new Post...");
             loadingBar.show();
@@ -144,7 +179,7 @@ public class AgroServiceActivity extends AppCompatActivity {
         postRandomName = saveCurrentDate + saveCurrentTime;
 
 
-        StorageReference filePath = PostsimagesReference.child("AgroService").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+        StorageReference filePath = PostsimagesReference.child("AgroShops").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
         filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -166,27 +201,27 @@ public class AgroServiceActivity extends AppCompatActivity {
 
     private void SavingPostInformationToDatabase() {
 
-
-      PostsRef.addValueEventListener(new ValueEventListener() {
-          @Override
-          public void onDataChange(DataSnapshot dataSnapshot) {
-              if (dataSnapshot.exists())
-              {
-               countPosts =dataSnapshot.getChildrenCount();
-
-              }
-              else
-              {
-               countPosts=0;
-
-              }
-          }
-
-          @Override
-          public void onCancelled(DatabaseError databaseError) {
-
-          }
-      });
+//
+//      PostsRef.addValueEventListener(new ValueEventListener() {
+//          @Override
+//          public void onDataChange(DataSnapshot dataSnapshot) {
+//              if (dataSnapshot.exists())
+//              {
+//               countPosts =dataSnapshot.getChildrenCount();
+//
+//              }
+//              else
+//              {
+//               countPosts=0;
+//
+//              }
+//          }
+//
+//          @Override
+//          public void onCancelled(DatabaseError databaseError) {
+//
+//          }
+//      });
 
         UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -203,7 +238,12 @@ public class AgroServiceActivity extends AppCompatActivity {
                     postsMap.put("postimage", downloadurl);
                     postsMap.put("profileimage", userProfileImage);
                     postsMap.put("fullname", userfullName);
-                    postsMap.put("Counter", countPosts);
+                   //postsMap.put("Counter", countPosts);
+                    postsMap.put("Item_name", Item_name);
+                    postsMap.put("Price", Price);
+                    postsMap.put("Offers",Offers);
+                    postsMap.put("Services", SpinnerSelect);
+                    postsMap.put("location",Location);
 
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {

@@ -1,26 +1,29 @@
 package com.example.haran.agritec;
 
-public class BankandInsur {
-    public String uid,time,date,postimage,description,profileimage,fullname;
-    private String Offers;
-    private String Location;
+public class InformationCentergetset {
 
-    public   BankandInsur()
+    private String uid;
+    private String time;
+    private String date;
+    private String description;
+    private String profileimage;
+    private String fullname;
+    private String rating;
+
+    public InformationCentergetset()
+    {}
+    public InformationCentergetset(String uid, String time, String date, String description, String profileimage, String fullname, String rating)
     {
 
-    }
-
-
-    public   BankandInsur (String uid, String time, String date, String postimage, String description, String profileimage, String fullname,String Offers,String Location) {
         this.uid = uid;
         this.time = time;
         this.date = date;
-        this.postimage = postimage;
-        this.description = description;
-        this.profileimage = profileimage;
-        this.fullname = fullname;
-        this.Offers=Offers;
-        this.Location=Location;
+        this.description=description;
+        this.profileimage=profileimage;
+        this.fullname=fullname;
+        this.rating=rating;
+
+
     }
 
     public String getUid() {
@@ -47,14 +50,6 @@ public class BankandInsur {
         this.date = date;
     }
 
-    public String getPostimage() {
-        return postimage;
-    }
-
-    public void setPostimage(String postimage) {
-        this.postimage = postimage;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -78,24 +73,14 @@ public class BankandInsur {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-    public String getOffers() {
-        return Offers;
+
+    public String getRating() {
+        return rating;
     }
 
-    public void setOffers(String offers) {
-        Offers = offers;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
-
-    public String getLocation() {
-        return Location;
-    }
-
-    public void setLocation(String location) {
-        Location = location;
-    }
-
-
 
 
 }
-

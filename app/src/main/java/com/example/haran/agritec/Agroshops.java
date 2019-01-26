@@ -68,7 +68,7 @@ public class Agroshops extends AppCompatActivity {
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 //        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("Agroshops");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("AgroService");
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_post_image);
         UpdatePostButton = (Button) findViewById(R.id.update_post_button);
@@ -86,7 +86,7 @@ public class Agroshops extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("Agro Service");
 
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +167,7 @@ public class Agroshops extends AppCompatActivity {
         postRandomName = saveCurrentDate + saveCurrentTime;
 
 
-        StorageReference filePath = PostsimagesReference.child("Agrishops").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+        StorageReference filePath = PostsimagesReference.child("AgroService").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
         filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -217,6 +217,7 @@ public class Agroshops extends AppCompatActivity {
                                         //SendUserToMainActivity();
                                         Toast.makeText(Agroshops.this, "New Post is updated successfully", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
+                                        SendUsertoServiceActivity();
                                     } else {
                                         Toast.makeText(Agroshops.this, "Error Occured while updating your post", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
@@ -229,6 +230,9 @@ public class Agroshops extends AppCompatActivity {
 
             }
 
+
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -236,6 +240,14 @@ public class Agroshops extends AppCompatActivity {
         });
 
     }
+
+
+    private void SendUsertoServiceActivity() {
+            Intent LoginIntent = new Intent(Agroshops.this,Agroshopsview.class);
+            startActivity(LoginIntent);
+
+        }
+
 
 
     private void OpenGallery() {

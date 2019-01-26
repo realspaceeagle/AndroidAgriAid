@@ -2,7 +2,6 @@ package com.example.haran.agritec;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,54 +22,44 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class BankandInsuranceActivity extends AppCompatActivity {
+public class InformationCenterActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ProgressDialog loadingBar;
-    private android.widget.Spinner Spinner;
-
-
-    private ImageButton SelectPostImage;
     private Button UpdatePostButton, ViewAgropostButton;
-    private EditText PostDescription,PostOffers,PostLocation;
-    private String SpinnerSelect,Offers;
-
-    private static final int Gallery_Pick = 1;
-    private Uri ImageUri;
-    private String Description,Location;
-
+    private EditText PostDescription;
+    private String Description;
     private StorageReference PostsimagesReference;
-    private DatabaseReference UsersRef, PostsRef;
+    private DatabaseReference UsersRef, PostsRef,rateref;
 
-    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadurl, current_user_id;
+    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadurl, current_user_id, PostKey;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bankand_insurance);
+        setContentView(R.layout.activity_information_center_new);
         mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
 
-
         PostsimagesReference = FirebaseStorage.getInstance().getReference();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-//        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("BankandInsurance");
+    //    PostKey=getIntent().getExtras().get("PostKey").toString();
+       // rateref=FirebaseDatabase.getInstance().getReference().child(PostKey);
 
-        SelectPostImage = (ImageButton) findViewById(R.id.select_post_image);
+
+
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("DiscussionForum");
         UpdatePostButton = (Button) findViewById(R.id.update_post_button);
         ViewAgropostButton = (Button) findViewById(R.id.view_post_button);
         PostDescription = (EditText) findViewById(R.id.post_description);
-        Spinner = findViewById(R.id.spinner_agroshops);
-        PostOffers = (EditText) findViewById(R.id.Offers);
-        PostLocation= (EditText) findViewById(R.id.Location);
+
 
         loadingBar = new ProgressDialog(this);
 
@@ -81,14 +68,6 @@ public class BankandInsuranceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Update Post");
-
-        SelectPostImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                OpenGallery();
-            }
-        });
 
         UpdatePostButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,50 +81,32 @@ public class BankandInsuranceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               BankandInsuranceview();
+                SendUsertoInformationcenterview();
             }
         });
-
     }
-
-    private void BankandInsuranceview() {
-        Intent LoginIntent = new Intent(BankandInsuranceActivity.this, BankandInsuranceviewActivity.class);
+    private void SendUsertoInformationcenterview() {
+        Intent LoginIntent = new Intent(InformationCenterActivity.this,InformationCenterViewActivity.class);
         startActivity(LoginIntent);
     }
 
     private void ValidatePostInfo() {
         Description = PostDescription.getText().toString();
-        SpinnerSelect = Spinner.getSelectedItem().toString();
-        Location=PostLocation.getText().toString();
-        Offers= PostOffers.getText().toString();
-        if (ImageUri == null) {
-            Toast.makeText(this, "Please select post image...", Toast.LENGTH_SHORT).show();
-
-        } else if (TextUtils.isEmpty(Description)) {
-            Toast.makeText(this, "Please say something about your image...", Toast.LENGTH_SHORT).show();
-
+        if (TextUtils.isEmpty(Description)) {
+            Toast.makeText(this, "Please say something about your Post...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Location)) {
-            Toast.makeText(this, "Please add Location...", Toast.LENGTH_SHORT).show();
 
-        }
-        else if (TextUtils.isEmpty(Offers)) {
-            Toast.makeText(this, "Please add Offers...", Toast.LENGTH_SHORT).show();
-
-        }
         else {
             loadingBar.setTitle("Add New Post");
             loadingBar.setMessage("Please wait,while we are updating your new Post...");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
-
-            StoringImageToFirebaseStorage();
-
-        }
+            StoringDateToFirebase();
+            }
 
     }
 
-    private void StoringImageToFirebaseStorage() {
+    private void StoringDateToFirebase() {
 
         Calendar calFordDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-YYYY");
@@ -154,29 +115,12 @@ public class BankandInsuranceActivity extends AppCompatActivity {
         Calendar calFordTime = Calendar.getInstance();
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         saveCurrentTime = currentTime.format(calFordDate.getTime());
-
         postRandomName = saveCurrentDate + saveCurrentTime;
 
+        SavingPostInformationToDatabase();
 
-        StorageReference filePath = PostsimagesReference.child("BankandInsurance").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
-        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-
-
-                if (task.isSuccessful()) {
-                    downloadurl = task.getResult().getDownloadUrl().toString();
-                    Toast.makeText(BankandInsuranceActivity.this, "image Uploaded successfully to storage ...", Toast.LENGTH_SHORT).show();
-
-                    SavingPostInformationToDatabase();
-
-                } else {
-                    String message = task.getException().getMessage();
-                    Toast.makeText(BankandInsuranceActivity.this, "Error occured:", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
+
 
     private void SavingPostInformationToDatabase() {
         UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
@@ -191,12 +135,8 @@ public class BankandInsuranceActivity extends AppCompatActivity {
                     postsMap.put("date", saveCurrentDate);
                     postsMap.put("time", saveCurrentTime);
                     postsMap.put("description", Description);
-                    postsMap.put("postimage", downloadurl);
                     postsMap.put("profileimage", userProfileImage);
                     postsMap.put("fullname", userfullName);
-                    postsMap.put("Offers",Offers);
-                    postsMap.put("Location",Location);
-                    postsMap.put("Services", SpinnerSelect);
 
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
@@ -205,10 +145,11 @@ public class BankandInsuranceActivity extends AppCompatActivity {
 
                                     if (task.isSuccessful()) {
                                         //SendUserToMainActivity();
-                                        Toast.makeText(BankandInsuranceActivity.this, "New Post is updated successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(InformationCenterActivity.this, "New Post is updated successfully", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
+                                       //SendUsertoInformationCenterctivity();
                                     } else {
-                                        Toast.makeText(BankandInsuranceActivity.this, "Error Occured while updating your post", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(InformationCenterActivity.this, "Error Occured while updating your post", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
                                 }
@@ -219,50 +160,29 @@ public class BankandInsuranceActivity extends AppCompatActivity {
 
             }
 
+
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
-    }
 
-
-    private void OpenGallery() {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, Gallery_Pick);
-
-
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Gallery_Pick && resultCode == RESULT_OK && data != null) {
-            ImageUri = data.getData();
-            SelectPostImage.setImageURI(ImageUri);
-        }
-
-    }
-
-    //@Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if(id == android.R.id.home)
-//        {
-//            SendUserToMainActivity();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-//    private void SendUserToMainActivity() {
+//        private void SendUsertoInformationCenterctivity() {
+//            Intent LoginIntent = new Intent(InformationCenterActivity.this,InformationCenterViewActivity.class);
+//            startActivity(LoginIntent);
 //
-//        Intent mainIntent = new Intent(Agroshops.this,Agroshopsview.class);
-//        startActivity(mainIntent);
-//    }
-}
+//        }
 
+    }
+
+
+
+
+
+
+
+
+}

@@ -2,13 +2,25 @@ package com.example.haran.agritec;
 
 public class agservice {
 
-    public String uid,time,date,postimage,description,profileimage,fullname;
+    private String uid;
+    private String time;
+    private String date;
+    private String postimage;
+    private String description;
+    private String profileimage;
+    private String fullname;
+
+
+
+    private String Item_name;
+    private String Price,Offers,Location;
     public  agservice()
     {
 
     }
 
-    public   agservice(String uid, String time, String date, String postimage, String description, String profileimage, String fullname) {
+
+    public   agservice(String uid, String time, String date, String postimage, String description, String profileimage, String fullname,String Price,String Offers,String Location,String  Item_name) {
         this.uid = uid;
         this.time = time;
         this.date = date;
@@ -16,7 +28,42 @@ public class agservice {
         this.description = description;
         this.profileimage = profileimage;
         this.fullname = fullname;
+        this.Price=Price;
+        this.Offers=Offers;
+        this.Location=Location;
+        this.Item_name=Item_name;
     }
+    public String getItem_name() {
+        return Item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        Item_name = item_name;
+    }
+    public String getPrice() {
+        return Price;
+    }
+
+    public void setPrice(String price) {
+        this.Price = price;
+    }
+
+    public String getOffers() {
+        return Offers;
+    }
+
+    public void setOffers(String offers) {
+        this.Offers = offers;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String Location) {
+        this.Location = Location;
+    }
+
 
     public String getUid() {
         return uid;

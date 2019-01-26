@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -17,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -34,10 +37,12 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;//firebase 1st
     private DatabaseReference UsersRef ,PostsRef,LikesRef;
+    private android.widget.Spinner Spinner;
+    private String SpinnerSelect;
 
 
     String currentUserID;
-    Boolean Likechecker=false;
+   // Boolean Likechecker=false;
 
 
 
@@ -51,7 +56,8 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
         currentUserID = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef=FirebaseDatabase.getInstance().getReference().child("BankandInsurance");
-        LikesRef=FirebaseDatabase.getInstance().getReference().child("BankandInsuranceLikes");
+
+        //LikesRef=FirebaseDatabase.getInstance().getReference().child("BankandInsuranceLikes");
 
 
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
@@ -60,7 +66,8 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
 
 
 
-        AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
+      //  AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
+        Spinner   = findViewById(R.id.shop_view_spinner);
 
         postList =(RecyclerView) findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
@@ -70,32 +77,51 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
         postList.setLayoutManager(linearLayoutManager);
 
 
-
-
-
-
-        AddNewPostButton.setOnClickListener(new View.OnClickListener (){
+        Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v)
-            {
-                SendUserToAgroshops();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                SpinnerSelect = Spinner.getSelectedItem().toString();
+                DisplayAllUserPosts(  SpinnerSelect);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                SpinnerSelect = Spinner.getSelectedItem().toString();
+                DisplayAllUserPosts(  SpinnerSelect);
             }
         });
 
 
-        DisplayAllUserPosts();
 
+//        AddNewPostButton.setOnClickListener(new View.OnClickListener (){
+//            @Override
+//            public void onClick(View v)
+//            {
+//                SendUserToAgroshops();
+//            }
+//        });
+//
+//
+//        DisplayAllUserPosts();
+//
     }
 
-    private void DisplayAllUserPosts()
+    private void DisplayAllUserPosts(String SpinnerSelect)
     {
+
+        Query ServicesQuery  =PostsRef.orderByChild("Services")
+                .startAt(SpinnerSelect).endAt(SpinnerSelect+ "\uf8ff");
+
         FirebaseRecyclerAdapter<BankandInsur,PostViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<BankandInsur, PostViewHolder>
                         (
                                 BankandInsur.class,
-                                R.layout.all_posts_layout,
+                                R.layout.bank_and_insurance_view_layout,
                                 PostViewHolder.class,
-                                PostsRef
+                                ServicesQuery
                         )
                 {
                     @Override
@@ -109,9 +135,11 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
                         viewHolder.setDescription(model.getDescription());
                         viewHolder.setProfileimage(model.getProfileimage());
                         viewHolder.setPostimage(model.getPostimage());
+                        viewHolder.setOffers(model.getOffers());
+                        viewHolder.setLocation(model.getLocation());
 
 
-                        viewHolder.setLikeButtonStatus(PostKey);
+                       // viewHolder.setLikeButtonStatus(PostKey);
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -139,39 +167,39 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
 //                        });
 
 
-                        viewHolder.LikepostButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                Likechecker=true;
-
-                                LikesRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot)
-                                    {
-                                        if(Likechecker.equals(true))
-                                        {
-                                            if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
-                                                LikesRef.child(PostKey).child(currentUserID).removeValue();
-                                                Likechecker = false;
-                                            }
-                                            else
-                                            {
-                                                LikesRef.child(PostKey).child(currentUserID).setValue(true);
-                                                Likechecker = false;
-                                            }
-                                        }
-
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                        });
+//                        viewHolder.LikepostButton.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v)
+//                            {
+//                                Likechecker=true;
+//
+//                                LikesRef.addValueEventListener(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(DataSnapshot dataSnapshot)
+//                                    {
+//                                        if(Likechecker.equals(true))
+//                                        {
+//                                            if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
+//                                                LikesRef.child(PostKey).child(currentUserID).removeValue();
+//                                                Likechecker = false;
+//                                            }
+//                                            else
+//                                            {
+//                                                LikesRef.child(PostKey).child(currentUserID).setValue(true);
+//                                                Likechecker = false;
+//                                            }
+//                                        }
+//
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(DatabaseError databaseError) {
+//
+//                                    }
+//                                });
+//                            }
+//                        });
 
 
                     }
@@ -193,43 +221,43 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
             super(itemView);
             mView= itemView;
 
-            LikepostButton = (ImageButton)mView.findViewById(R.id.like_button);
-            CommentPostButton = (ImageButton)mView.findViewById(R.id.comment_button);
-            DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
+//            LikepostButton = (ImageButton)mView.findViewById(R.id.like_button);
+//            CommentPostButton = (ImageButton)mView.findViewById(R.id.comment_button);
+//            DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
+//
+////            LikesRef =FirebaseDatabase.getInstance().getReference().child("FarmerLikes");
+//            LikesRef =FirebaseDatabase.getInstance().getReference().child("BankandInsuranceLikes");
+//            currentUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
+      }
+//
+//        public void setLikeButtonStatus(final String PostKey)
+//        {
+//            LikesRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot)
+//                {
+//                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
+//                    {
+//                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
+//                        LikepostButton.setImageResource(R.drawable.like);
+//                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
+//                    }
+//                    else
+//                    {
+//                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
+//                        LikepostButton.setImageResource(R.drawable.dislike);
+//                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
 
-//            LikesRef =FirebaseDatabase.getInstance().getReference().child("FarmerLikes");
-            LikesRef =FirebaseDatabase.getInstance().getReference().child("BankandInsuranceLikes");
-            currentUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
-        }
-
-        public void setLikeButtonStatus(final String PostKey)
-        {
-            LikesRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
-                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
-                    {
-                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
-                        LikepostButton.setImageResource(R.drawable.like);
-                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
-                    }
-                    else
-                    {
-                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
-                        LikepostButton.setImageResource(R.drawable.dislike);
-                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-        }
+//       }
 
         public void setFullname(String fullname)
         {
@@ -262,6 +290,16 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
         {
             ImageView Postimage =(ImageView) mView.findViewById(R.id.post_image);
             Picasso.get().load(postimage).into(Postimage);
+        }
+        public void setOffers(String Offers)
+        {
+            TextView DisplayOffers=(TextView)mView.findViewById(R.id.Offers);
+            DisplayOffers.setText("Offers "+Offers);
+        }
+        public void setLocation(String Location)
+        {
+            TextView DisplayOffers=(TextView)mView.findViewById(R.id.post_Location);
+            DisplayOffers.setText("Location "+Location);
         }
 
     }

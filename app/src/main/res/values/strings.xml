@@ -11,4 +11,19 @@
         <item> LaborService</item>
         <item> Transport</item>
     </string-array>
+
+    <string-array name="BankandInsurance">
+        <item>Loans</item>
+        <item> Finance</item>
+        <item>Insurance</item>
+    </string-array>
+
+    <string-array name="Shopitems">
+        <item>HarvestItems</item>
+        <item> Seeds</item>
+        <item>MilkProducts</item>
+        <item>Fruits and Vegetables</item>
+        <item>Honey Products</item>
+        <item>Animal feeds</item>
+    </string-array>
 </resources>

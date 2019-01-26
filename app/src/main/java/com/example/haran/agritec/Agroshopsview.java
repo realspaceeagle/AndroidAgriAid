@@ -67,7 +67,7 @@ public class Agroshopsview extends AppCompatActivity {
         mAuth =FirebaseAuth.getInstance();//firebase 1st
         currentUserID = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        Agroshopsref = FirebaseDatabase.getInstance().getReference().child("Agroshops");
+        Agroshopsref = FirebaseDatabase.getInstance().getReference().child("AgroService");
 
        // LikesRef=FirebaseDatabase.getInstance().getReference().child("AgroshopLikes");
 
@@ -75,12 +75,12 @@ public class Agroshopsview extends AppCompatActivity {
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
         SearchButton =(ImageButton) findViewById(R.id.search_services);
         setSupportActionBar(mToolbar);//setting up home tool bar
-        getSupportActionBar().setTitle("AgroShopfeed");//set title for action bar
+        getSupportActionBar().setTitle("AgroService");//set title for action bar
 
 
 
-        AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
-        Spinner = findViewById(R.id.shop_view_spinner);
+       // AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
+        Spinner   = findViewById(R.id.shop_view_spinner);
 
         postList =(RecyclerView) findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);

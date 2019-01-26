@@ -5,7 +5,6 @@
     android:background="@color/mainbackground"
     android:layout_height="wrap_content"
     >
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,30 +90,26 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/post_Item_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:padding="3dp"
-            android:text="name"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-        <TextView
             android:id="@+id/post_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:padding="3dp"
-            android:background="@drawable/border"
             android:text="post_description......"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
-            />
+            android:textSize="14sp" />
 
-
+        <TextView
+            android:id="@+id/post_Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:padding="3dp"
+            android:text="Location"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/post_image"
@@ -133,28 +128,25 @@
             android:layout_marginRight="10dp">
 
 
-            <TextView
-                android:id="@+id/Price"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="15dp"
-                android:text="Price"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
+            <!--<TextView-->
+                <!--android:id="@+id/Price"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Price"-->
+                <!--android:padding="15dp"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textStyle="bold"/>-->
             <TextView
                 android:id="@+id/Offers"
-                android:layout_width="179dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="100dp"
-                android:background="@drawable/border"
-                android:padding="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Offers"
+                android:padding="15dp"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"/>
 
 
 

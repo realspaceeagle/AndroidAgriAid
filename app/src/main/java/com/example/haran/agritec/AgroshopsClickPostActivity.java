@@ -47,7 +47,7 @@ public class AgroshopsClickPostActivity extends AppCompatActivity {
 
 
         PostKey=getIntent().getExtras().get("PostKey").toString();
-        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Agroshops").child(PostKey);
+        ClickPostRef = FirebaseDatabase.getInstance().getReference().child("AgroService").child(PostKey);
 
 
         postImage=(ImageView) findViewById(R.id.click_post_image);

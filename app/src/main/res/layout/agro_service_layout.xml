@@ -2,10 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/mainbackground"
     android:layout_height="wrap_content"
-    >
-
+    android:background="@color/mainbackground">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,13 +89,23 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/post_Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:padding="3dp"
+            android:text="Location"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+        <TextView
             android:id="@+id/post_Item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:padding="3dp"
-            android:text="name"
+            android:text="Itemname"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
@@ -108,12 +116,10 @@
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:padding="3dp"
-            android:background="@drawable/border"
             android:text="post_description......"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            />
-
+            android:background="@drawable/border"/>
 
 
         <ImageView
@@ -135,7 +141,7 @@
 
             <TextView
                 android:id="@+id/Price"
-                android:layout_width="110dp"
+                android:layout_width="126dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="15dp"
@@ -146,8 +152,8 @@
 
             <TextView
                 android:id="@+id/Offers"
-                android:layout_width="179dp"
-                android:layout_height="match_parent"
+                android:layout_width="137dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
                 android:background="@drawable/border"
                 android:padding="15dp"
