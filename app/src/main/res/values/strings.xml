@@ -3,4 +3,27 @@
     <string name="profilename">ProfileName</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer close</string>
+    <string name="title_activity_agroshopsview">Agroshopsview</string>
+    <string-array name="Services">
+        <item> Transport</item>
+        <item> FertilizerService</item>
+        <item> CropServices</item>
+        <item> LaborService</item>
+        <item> Transport</item>
+    </string-array>
+
+    <string-array name="BankandInsurance">
+        <item>Loans</item>
+        <item> Finance</item>
+        <item>Insurance</item>
+    </string-array>
+
+    <string-array name="Shopitems">
+        <item>HarvestItems</item>
+        <item> Seeds</item>
+        <item>MilkProducts</item>
+        <item>Fruits and Vegetables</item>
+        <item>Honey Products</item>
+        <item>Animal feeds</item>
+    </string-array>
 </resources>

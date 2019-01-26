@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorProfile"
+
+    tools:context=".ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/my_profile_pic"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="15dp"
+    android:src="@drawable/profile"/>
+
+        <TextView
+            android:id="@+id/my_profile_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_pic"
+            android:layout_marginTop="5dp"
+            android:text="Profile name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#f1ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/my_profile_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_fullname"
+
+            android:text="user name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#f1ffffff"
+            android:textSize="18sp"
+           />
+
+        <TextView
+            android:id="@+id/my_profile_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_username"
+            android:layout_marginTop="5dp"
+            android:text="About"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="22sp" />
+        <TextView
+            android:id="@+id/my_profile_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_status"
+            android:layout_marginTop="60dp"
+            android:text="Address"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#f1ffffff"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:id="@+id/my_profile_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_country"
+            android:layout_marginTop="2dp"
+            android:text="Date of Birth"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#f1ffffff"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/my_profile_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_dob"
+            android:layout_marginTop="2dp"
+            android:text="Email"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#f1ffffff"
+            android:textSize="18sp"
+            />
+
+
+        <TextView
+            android:id="@+id/my_profile_relationshipstatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_profile_gender"
+            android:layout_marginTop="2dp"
+            android:text="PhoneNo"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#f1ffffff"
+            android:textSize="18sp"
+            />
+        <Button
+            android:id="@+id/my_profile_view_location"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/my_profile_relationshipstatus"
+            android:text="View Location"
+            android:layout_margin="10sp"
+            android:background="@drawable/button"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+
+            />
+
+
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

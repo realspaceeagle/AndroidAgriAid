@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/drawable_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/mainbackground"
+tools:context=".BankandInsuranceviewActivity">
+
+
+
+    <include
+        android:id="@+id/main_page_toolbar"
+        layout="@layout/app_bar_layout"
+        ></include>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        >
+
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="442dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="0dp">>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/all_users_post_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true" />
+
+
+        </FrameLayout>
+
+        <Spinner
+            android:id="@+id/shop_view_spinner"
+            android:layout_width="280dp"
+            android:layout_height="57dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="18dp"
+            android:background="@drawable/inputs"
+            android:entries="@array/BankandInsurance"
+            android:padding="10dp" />
+
+        <ImageButton
+            android:id="@+id/search_services"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="54dp"
+            android:layout_toEndOf="@+id/shop_view_spinner"
+            android:background="@drawable/inputs"
+            android:src="@drawable/find" />
+
+
+    </RelativeLayout>
+
+    <!--</FrameLayout>-->
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/add_new_post_button"-->
+    <!--android:layout_width="48dp"-->
+    <!--android:layout_height="48dp"-->
+
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:src="@drawable/add_post_high"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:layout_marginBottom="4dp"-->
+    <!--android:layout_marginRight="12dp"-->
+    <!--android:background="@color/colorPrimaryDark"-->
+    <!--android:baselineAlignBottom="false"-->
+    <!--android:focusableInTouchMode="false"-->
+    <!--/>-->
+
+    <!--// android:layout_above="@+id/main_container"-->
+
+
+
+    <!--</RelativeLayout>-->
+
+</RelativeLayout>
+
+    <!--</android.support.v4.widget.DrawerLayout>-->

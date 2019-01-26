@@ -33,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SetupActivity extends AppCompatActivity {
 
-    private EditText UserName,FullName,CountryName;
+    private EditText UserName,FullName,Addressname,role;
     private Button SaveInformationbutton;
     private CircleImageView ProfileImage;
     private ProgressDialog loadingBar;
@@ -60,7 +60,8 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
 
         UserName =(EditText) findViewById(R.id.setup_user_name);
         FullName =(EditText) findViewById(R.id.setup_full_name);
-        CountryName =(EditText) findViewById(R.id.setup_country);
+        Addressname =(EditText) findViewById(R.id.setup_country);
+        role =(EditText) findViewById(R.id.setup_role);
         SaveInformationbutton=(Button)findViewById(R.id.setup_information_button);
         ProfileImage =(CircleImageView) findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(this);
@@ -129,8 +130,9 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
               {
                   loadingBar.setTitle("Profile Image");
                   loadingBar.setMessage("Please wait,while we are updating your profile Image...");
-                  loadingBar.show();
                   loadingBar.setCanceledOnTouchOutside(true);
+                  loadingBar.show();
+
 
                   Uri resultUri = result.getUri();
 
@@ -189,7 +191,9 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
     {
         String username =UserName.getText().toString();
         String fullname =FullName.getText().toString();
-        String country =CountryName.getText().toString();
+        String address =Addressname.getText().toString();
+        String rolesetup= role.getText().toString();
+
 
         if(TextUtils.isEmpty(username))
         {
@@ -202,50 +206,58 @@ UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profil
             Toast.makeText(this, "please write your fullname...", Toast.LENGTH_SHORT).show();
 
         }
-        if(TextUtils.isEmpty(country))
+        if(TextUtils.isEmpty(address))
         {
             Toast.makeText(this, "please write your country...", Toast.LENGTH_SHORT).show();
 
         }
         else
         {
-            loadingBar.setTitle("Saving Information");
-            loadingBar.setMessage("Please wait,while we are creating your new Account...");
-            loadingBar.show();
-            loadingBar.setCanceledOnTouchOutside(true);
+            if(rolesetup.equals("middleman")||rolesetup.equals("farmer")) {
+
+                loadingBar.setTitle("Saving Information");
+                loadingBar.setMessage("Please wait,while we are creating your new Account...");
+                loadingBar.show();
+                loadingBar.setCanceledOnTouchOutside(true);
 
 
 
 
 
-            HashMap userMap =new HashMap();
-             userMap.put("username",username);
-            userMap.put("fullname",fullname);
-            userMap.put("country",country);
-            userMap.put("status","Hey there i am using social network ,developed");
-            userMap.put("gender","none");
-            userMap.put("dob","none");
-            userMap.put("relationshipstatus","none");
-            UsersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task)
-                {
-                    if(task.isSuccessful())
-                    {
-                       SendUserToMainActivity();
+                HashMap userMap =new HashMap();
+                userMap.put("username",username);
+                userMap.put("fullname",fullname);
+                userMap.put("address",address);
+                userMap.put("about","Hey there i am using social network ,developed");
+                userMap.put("email","none");
+                userMap.put("dob","none");
+                userMap.put("phoneno","none");
+                userMap.put("role",rolesetup);
 
-                        Toast.makeText(SetupActivity.this, "Your account is created successfully", Toast.LENGTH_LONG).show();
-                        loadingBar.dismiss();
+                UsersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()) {
+                            SendUserToMainActivity();
+
+                            Toast.makeText(SetupActivity.this, "Your account is created successfully", Toast.LENGTH_LONG).show();
+                            loadingBar.dismiss();
+                        } else {
+                            String message = task.getException().getMessage();
+                            Toast.makeText(SetupActivity.this, "Error occured" + message, Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
+
                     }
-                    else
-                    {
-                        String message =task.getException().getMessage();
-                        Toast.makeText(SetupActivity.this, "Error occured"+message, Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
-                    }
+                });
 
-                }
-            });
+            }
+            else{
+
+                Toast.makeText(SetupActivity.this, "Please refer middleman/farmer", Toast.LENGTH_LONG).show();
+            }
+
+
         }
 
 

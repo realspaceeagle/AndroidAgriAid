@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register_back"
+    android:background="@drawable/materialsea2"
     tools:context=".RegisterActivity">
 
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/iconagri" />
+        app:srcCompat="@drawable/logonew" />
 
     <EditText
         android:id="@+id/register_email"

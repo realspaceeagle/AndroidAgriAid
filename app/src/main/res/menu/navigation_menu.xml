@@ -1,41 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id= "@+id/nav_post"
-    android:title="Add new post"
-    android:icon="@drawable/add_post"/>
 
-    <item
-        android:id= "@+id/nav_profile"
-        android:title="Profile"
-        android:icon="@drawable/profile_icon"/>
+
+
+<menu  xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <!--<item-->
+    <!--android:id= "@+id/nav_post"-->
+    <!--android:title="Add new post"-->
+    <!--android:icon="@drawable/add_post"/>-->
 
     <item
         android:id= "@+id/nav_home"
         android:title="Home"
-        android:icon="@drawable/home" />
+        android:icon="@drawable/homemenu"
+        />
+
+
+
+    <item
+        android:id= "@+id/nav_profile"
+        android:title="Profile"
+        android:icon="@drawable/profilemenu"/>
+
+
 
     <item
         android:id= "@+id/nav_friends"
         android:title="friends"
         android:icon="@drawable/friends"/>
-    <item
-        android:id= "@+id/nav_find_friends"
+
+    <item android:id= "@+id/nav_find_friends"
         android:title="find_friends"
-        android:icon="@drawable/find_people" />
-    <item
-        android:id= "@+id/nav_Messages"
-        android:title="Messages"
-        android:icon="@drawable/messages"/>
+        android:icon="@drawable/findfriends3" />
 
-    <item
-        android:id= "@+id/nav_Settings"
-        android:title="Settings"
-        android:icon="@drawable/settings"/>
+    <item android:id="@+id/nav_farmer"
+        android:icon="@drawable/farmermenu"
+        android:title="farmer" />
 
+
+
+    <item android:id="@+id/nav_middlemen"
+        android:icon="@drawable/businessman1"
+        android:title="Middlemen"
+        >
+
+        <menu>
+            <item android:id="@+id/nav_BanksandInsurance"
+                android:icon="@drawable/bankandinsurancemenu"
+                android:title="BanksandInsurance" />
+            <item
+                android:id="@+id/nav_Agro_Services"
+                android:icon="@drawable/agroservicemenu"
+                android:title="AgroServices" />
+            <item
+                android:id="@+id/nav_Agro_shops"
+                android:icon="@drawable/agroshopsmenu"
+                android:title="AgroShops" />
+        </menu>
+    </item>
+
+
+
+<item
+    android:id="@+id/navbar_informationcenter"
+    android:icon="@drawable/informationcenter2"
+    android:title="information" >
+
+    <menu>
+
+
+        <item
+            android:id="@+id/nav_advertisement"
+            android:icon="@drawable/advertismentmenu"
+            android:title="Advertisement" />
+
+        <item
+            android:id="@+id/nav_informationcenter"
+            android:icon="@drawable/informationmenu"
+            android:title="InformationCenter" />
+
+
+        <item
+            android:id="@+id/nav_discussionforum"
+            android:icon="@drawable/disussionforum"
+            android:title="Discussionforum" />
+        <item
+            android:id="@+id/nav_Messages"
+            android:icon="@drawable/messages"
+            android:title="Messages" />
+        <item
+            android:id="@+id/nav_Settings"
+            android:icon="@drawable/settingsmenu"
+            android:title="Settings"
+            />
+
+        <item
+            android:id= "@+id/nav_feedback"
+            android:title="Feedback"
+            android:icon="@drawable/feedback" />
+
+        <item
+            android:id= "@+id/nav_Logout"
+            android:title="Logout"
+            android:icon="@drawable/logout" />
+
+    </menu>
+
+
+</item>
     <item
-        android:id= "@+id/nav_Logout"
-        android:title="Logout"
-        android:icon="@drawable/logout" />
+        android:id= "@+id/viewfeedback"
+        android:title="ViewFeedback"
+        android:icon="@drawable/viewfeedback" />
+    <item
+        android:id= "@+id/deleteuser"
+        android:title="deleteuser"
+        android:icon="@drawable/deleteuser" />
+
+
 
 </menu>
