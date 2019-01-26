@@ -2,18 +2,21 @@ package com.example.haran.agritec;
 
 public class Posts {
 
-  public String uid,time,date,postimage,description,profileimage,fullname;
-  public Posts()
+  public String uid,time,date,postimage,description,description2,profileimage,fullname;
+
+
+    public Posts()
   {
 
   }
 
-    public Posts(String uid, String time, String date, String postimage, String description, String profileimage, String fullname) {
+    public Posts(String uid, String time, String date, String postimage, String description,String description2, String profileimage, String fullname) {
         this.uid = uid;
         this.time = time;
         this.date = date;
         this.postimage = postimage;
         this.description = description;
+        this.description2 = description2;
         this.profileimage = profileimage;
         this.fullname = fullname;
     }
@@ -56,6 +59,14 @@ public class Posts {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescription2() {
+        return description2;
+    }
+
+    public void setDescription2(String description2) {
+        this.description2 = description2;
     }
 
     public String getProfileimage() {

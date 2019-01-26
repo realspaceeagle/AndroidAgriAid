@@ -85,22 +85,22 @@
 
                 />
 
-            <EditText
-                android:id="@+id/settings_country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/settings_profile_full_name"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/inputs"
-                android:hint="address"
-                android:padding="12dp"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                android:textStyle="bold"
+        <EditText
+            android:id="@+id/settings_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_profile_full_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/inputs"
+            android:hint="address"
+            android:padding="12dp"
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
 
-                />
+            android:visibility="visible" />
 
             <EditText
                 android:id="@+id/settings_dob"
@@ -153,20 +153,22 @@
 
                 />
 
-            <Button
-                android:id="@+id/my_profile_view_location"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@+id/settings_relationship_status"
-                android:text="Location"
-                android:layout_margin="10sp"
-                android:background="@drawable/button"
-                android:textColor="@color/dark"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textAllCaps="false"
+        <Button
+            android:id="@+id/my_profile_view_location"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/settings_relationship_status"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/button"
+            android:text="My Location"
 
-                />
+            android:textAllCaps="false"
+            android:textColor="@color/dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
             <Button
                 android:id="@+id/update_account_settings_buttons"

@@ -1,7 +1,9 @@
 package com.example.haran.agritec;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -47,6 +49,16 @@ public class ProfileActivity extends AppCompatActivity {
         userDOB = (TextView)findViewById(R.id.my_profile_dob);
         userProfileImage =(CircleImageView) findViewById(R.id.my_profile_pic);
         viewlocationsettingsbutton=(Button) findViewById(R.id.my_profile_view_location);
+
+        viewlocationsettingsbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this,LocationShow.class);
+                startActivity(i);
+
+
+            }
+        });
 
         profileUserRef.addValueEventListener(new ValueEventListener() {
             @Override

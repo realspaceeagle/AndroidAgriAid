@@ -61,7 +61,6 @@ public class SetingsActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         currentUserId=mAuth.getCurrentUser().getUid();
         SettingsuserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
 
 
 
@@ -86,6 +85,14 @@ public class SetingsActivity extends AppCompatActivity {
 
         UpdateAccountsettingbutton=(Button) findViewById(R.id.update_account_settings_buttons);
        locationsettingsbutton=(Button) findViewById(R.id.my_profile_view_location);
+
+        locationsettingsbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SetingsActivity.this,LocationSet.class);
+                startActivity(i);
+            }
+        });
 
        SettingsuserRef.addValueEventListener(new ValueEventListener() {
            @Override
