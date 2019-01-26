@@ -32,9 +32,10 @@
         android:title="find_friends"
         android:icon="@drawable/findfriends3" />
 
-    <item android:id="@+id/nav_farmer"
+    <item
+        android:id="@+id/nav_farmer"
         android:icon="@drawable/farmer"
-        android:title="farmer" />
+        android:title="Farmers page" />
 
 
 
@@ -68,9 +69,9 @@
 
 
         <item
-            android:id="@+id/nav_advertisement"
-            android:icon="@drawable/advertisement"
-            android:title="Advertisement" />
+            android:id="@+id/weather"
+            android:icon="@drawable/weather"
+            android:title="Weather Data" />
 
         <item
             android:id="@+id/nav_informationcenter"
@@ -96,6 +97,11 @@
             android:id= "@+id/nav_feedback"
             android:title="Feedback"
             android:icon="@drawable/feedback" />
+
+        <item
+            android:id= "@+id/nav_advert"
+            android:title="Advertisement page"
+            android:icon="@drawable/adv" />
 
         <item
             android:id= "@+id/nav_Logout"

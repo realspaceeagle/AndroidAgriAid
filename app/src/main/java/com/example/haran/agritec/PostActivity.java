@@ -41,11 +41,11 @@ public class PostActivity extends AppCompatActivity {
 
     private ImageButton SelectPostImage;
     private Button UpdatePostButton;
-    private EditText PostDescription;
+    private EditText PostDescription,PostDescription2;
 
     private static  final int Gallery_Pick=1;
     private Uri ImageUri;
-    private String Description;
+    private String Description,Description2;
 
     private StorageReference PostsimagesReference;
     private DatabaseReference UsersRef,PostsRef;
@@ -70,6 +70,8 @@ public class PostActivity extends AppCompatActivity {
         SelectPostImage=(ImageButton) findViewById(R.id.select_post_image);
         UpdatePostButton=(Button) findViewById(R.id.update_post_button);
         PostDescription=(EditText) findViewById(R.id.post_description);
+        PostDescription2=(EditText) findViewById(R.id.post_description2);
+
 
         loadingBar = new ProgressDialog(this);
 
@@ -99,13 +101,15 @@ public class PostActivity extends AppCompatActivity {
 
     private void ValidatePostInfo()
     {
-         Description =PostDescription.getText().toString();
+        Description = PostDescription.getText().toString();
+        Description2 = PostDescription2.getText().toString();
+
         if(ImageUri==null)
         {
             Toast.makeText(this,"Please select post image...",Toast.LENGTH_SHORT).show();
 
         }
-        else if(TextUtils.isEmpty(Description))
+        else if(TextUtils.isEmpty(Description) || TextUtils.isEmpty(Description2))
         {
             Toast.makeText(this,"Please say something about your image...",Toast.LENGTH_SHORT).show();
 
@@ -172,6 +176,7 @@ public class PostActivity extends AppCompatActivity {
                  postsMap.put("date",saveCurrentDate);
                  postsMap.put("time",saveCurrentTime);
                  postsMap.put("description",Description);
+                 postsMap.put("description2",Description2);
                  postsMap.put("postimage",downloadurl);
                  postsMap.put("profileimage",userProfileImage);
                  postsMap.put("fullname",userfullName);

@@ -31,7 +31,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button LoginButton;
+    private Button LoginButton,reset;
     private ImageView googleSignInButton;
     private EditText UserEmail,UserPassword;
     private TextView NeedNewAccountLink;
@@ -56,6 +56,7 @@ private static final String TAG ="LoginActivity" ;
         UserEmail = (EditText) findViewById(R.id.Login_email);
         UserPassword = (EditText) findViewById(R.id.Login_password);
         LoginButton = (Button) findViewById(R.id.Login_button);
+        reset = findViewById(R.id.button5);
         googleSignInButton=(ImageView) findViewById(R.id.google_signin_button);
         loadingBar = new ProgressDialog(this);
 
@@ -74,6 +75,15 @@ private static final String TAG ="LoginActivity" ;
 
                 AllowingUserToLogin();
 
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(LoginActivity.this,ForgetPassword.class);
+                startActivity(i);
             }
         });
 
