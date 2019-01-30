@@ -53,6 +53,7 @@
         <activity android:name=".AgroServiceClickPostActivity" />
         <activity
             android:name=".BankandInsuranceActivity"
+            android:fitsSystemWindows="true"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".BankandInsuranceviewActivity" />
         <activity android:name=".BankandInsuranceClickPostActivity" />
@@ -68,11 +69,31 @@
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".InformationCenterActivity" />
-        <activity android:name=".InformationCenterViewActivity" />
-        <activity android:name=".InformationCenterClickPostActivity" />
-        <activity android:name=".InformationCenterCommentActivity" />
-        <activity android:name=".Admindeleteuser"></activity>
+        <activity
+            android:name=".InformationCenterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".InformationCenterViewActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".InformationCenterClickPostActivity"
+            android:parentActivityName=".InformationCenterViewActivity" />
+        <activity
+            android:name=".InformationCenterCommentActivity"
+            android:parentActivityName=".InformationCenterViewActivity" />
+        <activity android:name=".Admindeleteuser" />
+        <activity android:name=".FarmersPage" />
+        <activity android:name=".FarmersPostView" />
+        <activity android:name=".Weather" />
+        <activity
+            android:name=".AdvertisementPost"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".LocationShow" />
+        <activity android:name=".LocationSet" />
+        <activity android:name=".InformationCenter" />
+        <activity android:name=".Feedbacks" />
+        <activity android:name=".ViewFeedbackActivity" />
+        <activity android:name=".ApproveaddUserActivity"></activity>
     </application>
 
 </manifest>

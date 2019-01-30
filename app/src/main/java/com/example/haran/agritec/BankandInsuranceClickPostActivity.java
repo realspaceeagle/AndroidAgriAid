@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class BankandInsuranceClickPostActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private String PostKey, currentUserID ,databaseUserID ,description,image;
+    private String PostKey, currentUserID ,databaseUserID ,description,image,location,Offers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,9 @@ public class BankandInsuranceClickPostActivity extends AppCompatActivity {
 
                 if(dataSnapshot.exists()) {
                     description = dataSnapshot.child("description").getValue().toString();
-                    image = dataSnapshot.child("BankandInsurance").getValue().toString();
+                    image = dataSnapshot.child("postimage").getValue().toString();
+                    location=  dataSnapshot.child("Location").getValue().toString();
+                    Offers=  dataSnapshot.child("Offers").getValue().toString();
 
                     databaseUserID = dataSnapshot.child("uid").getValue().toString();
 
@@ -110,15 +113,34 @@ public class BankandInsuranceClickPostActivity extends AppCompatActivity {
         AlertDialog.Builder builder=new AlertDialog.Builder(BankandInsuranceClickPostActivity.this);
         builder.setTitle("Edit Post");
 
-        final EditText inputField = new EditText(BankandInsuranceClickPostActivity.this);
-        inputField.setText(description);
-        builder.setView(inputField);
+
+        LinearLayout layout = new LinearLayout(BankandInsuranceClickPostActivity.this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText inputField1 = new EditText(BankandInsuranceClickPostActivity.this);
+        inputField1.setText("description: "+description);
+        layout.addView(inputField1);
+
+        final EditText inputField2= new EditText(BankandInsuranceClickPostActivity.this);
+        inputField2.setText("Location:  "+location);
+        layout.addView(inputField2);
+
+        final EditText inputField3 = new EditText(BankandInsuranceClickPostActivity.this);
+        inputField3.setText("Offers:  "+Offers);
+        layout.addView(inputField3);
+
+
+
+
+        builder.setView(layout);
 
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                ClickPostRef.child("description").setValue(inputField.getText().toString());
+                ClickPostRef.child("description").setValue(inputField1.getText().toString());
+                ClickPostRef.child("Location").setValue(inputField2.getText().toString());
+                ClickPostRef.child("Offers").setValue(inputField3.getText().toString());
                 Toast.makeText(BankandInsuranceClickPostActivity.this,"Post has been updated successsfully",Toast.LENGTH_SHORT).show();
 
             }

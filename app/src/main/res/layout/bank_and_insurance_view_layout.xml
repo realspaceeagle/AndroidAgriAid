@@ -98,7 +98,8 @@
             android:padding="3dp"
             android:text="post_description......"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/post_Location"
@@ -107,7 +108,7 @@
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:padding="3dp"
-            android:text="Location"
+            android:text="Location:  "
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
@@ -141,12 +142,14 @@
                 android:id="@+id/Offers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Offers"
+                android:text="Offers: "
                 android:padding="15dp"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:textAlignment="center"
+                />
 
 
 

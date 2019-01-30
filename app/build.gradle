@@ -46,6 +46,7 @@ dependencies {
 
     implementation 'com.wajahatkarim3.clapfab:clapfab:1.0.6'
 
+    implementation 'com.android.support:cardview-v7:24.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

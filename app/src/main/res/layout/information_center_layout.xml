@@ -94,7 +94,7 @@
         <TextView
             android:id="@+id/post_description"
             android:layout_width="match_parent"
-            android:layout_height="92dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:padding="15dp"

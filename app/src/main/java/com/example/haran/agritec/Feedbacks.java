@@ -126,7 +126,7 @@ public class Feedbacks extends AppCompatActivity {
 
                     FdMap.put("image_url",image_url);
 
-                    FeedbackRef = FirebaseDatabase.getInstance().getReference().child("Feedbacks and Complaints").child(current_user_id+"-"+current_date_time)
+                    FeedbackRef = FirebaseDatabase.getInstance().getReference().child("Feedbacks and Complaints").child(current_user_id+"_"+current_date_time)
                             .updateChildren(FdMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override

@@ -80,7 +80,7 @@ public class BankandInsuranceActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("Bank and Insurance  Post");
 
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,6 +40,13 @@
     <item android:id="@+id/nav_farmer"
         android:icon="@drawable/farmermenu"
         android:title="farmer" />
+    <item android:id="@+id/weather"
+        android:icon="@drawable/weathermenu"
+        android:title="weather" />
+
+    <!--<item android:id="@+id/nav_advert"-->
+        <!--android:icon="@drawable/farmermenu"-->
+        <!--android:title="advertisement" />-->
 
 
 
@@ -74,7 +81,7 @@
 
 
         <item
-            android:id="@+id/nav_advertisement"
+            android:id="@+id/nav_advert"
             android:icon="@drawable/advertismentmenu"
             android:title="Advertisement" />
 
@@ -120,6 +127,11 @@
         android:id= "@+id/deleteuser"
         android:title="deleteuser"
         android:icon="@drawable/deleteuser" />
+
+    <item
+        android:id= "@+id/Approveaddeuser"
+        android:title="Accept Advertisement"
+        android:icon="@drawable/approve_add" />
 
 
 

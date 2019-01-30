@@ -8,5 +8,6 @@
     <color name="mainbackground">#D7D7D7</color>
     <color name="sendercolor">#90EE90</color>
     <color name="receivercolor">#B0E0E6</color>
+    <color name="blue">#20B2AA</color>
 
 </resources>

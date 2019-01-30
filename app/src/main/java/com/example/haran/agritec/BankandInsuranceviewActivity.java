@@ -62,7 +62,7 @@ public class BankandInsuranceviewActivity extends AppCompatActivity {
 
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);//setting up home tool bar
-        getSupportActionBar().setTitle("AgroShopfeed");//set title for action bar
+        getSupportActionBar().setTitle("Bank and Insurance feed");//set title for action bar
 
 
 

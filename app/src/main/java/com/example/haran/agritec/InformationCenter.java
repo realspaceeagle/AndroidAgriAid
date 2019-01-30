@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-class InformationCenter extends AppCompatActivity {
+public class InformationCenter extends AppCompatActivity {
 
     private DatabaseReference UsersRef ,PostsRef,LikesRef, CommentRef,UnLikeRef;
     Boolean Likechecker=false;

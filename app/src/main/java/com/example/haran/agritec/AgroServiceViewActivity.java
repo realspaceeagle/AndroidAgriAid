@@ -64,7 +64,7 @@ public class AgroServiceViewActivity extends AppCompatActivity {
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
         SearchButton =(ImageButton) findViewById(R.id.search_services);
         setSupportActionBar(mToolbar);//setting up home tool bar
-        getSupportActionBar().setTitle("AgroServicefeed");//set title for action bar
+        getSupportActionBar().setTitle("AgroShopfeed");//set title for action bar
 
 
 

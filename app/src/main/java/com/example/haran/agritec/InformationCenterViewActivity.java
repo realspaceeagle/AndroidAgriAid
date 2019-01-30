@@ -62,7 +62,7 @@ public class InformationCenterViewActivity extends AppCompatActivity {
         mToolbar =(Toolbar) findViewById(R.id.main_page_toolbar);
 
         setSupportActionBar(mToolbar);//setting up home tool bar
-        getSupportActionBar().setTitle("AgroShopfeed");//set title for action bar
+        getSupportActionBar().setTitle("Discussion Forum");//set title for action bar
 
       //  AddNewPostButton =(android.widget.ImageButton) findViewById(R.id.add_new_post_button);
     //   ratingbar=(RatingBar) findViewById(R.id.ratingBar);
@@ -104,13 +104,9 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                         viewHolder.setDate(model.getDate());
                         viewHolder.setDescription(model.getDescription());
                         viewHolder.setProfileimage(model.getProfileimage());
-                        // viewHolder.setPostimage(model.getPostimage());
-                        // viewHolder.setItem_name(model.getItem_name());
-                        // viewHolder.setPrice(model.getPrice());
-                        //viewHolder.setOffers(model.getOffers());
 
 
-                       //  viewHolder.setratingbarStatus(PostKey);
+
                         viewHolder.setLikeButtonStatus(PostKey);
 
 
@@ -120,7 +116,7 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                             {
                                 Likechecker=true;
 
-                               ratingbarref.addValueEventListener(new ValueEventListener() {
+                                Informationcenterref .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot)
                                     {
@@ -129,7 +125,7 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                                             if (dataSnapshot.child(PostKey).hasChild("Likes")) {
                                                 Long Like=(Long)dataSnapshot.child(PostKey).child("Likes").getValue();
                                                 Like++;
-                                                ratingbarref.child(PostKey).child("Likes").setValue(Like);
+                                                Informationcenterref .child(PostKey).child("Likes").setValue(Like);
                                                Informationcenterref.child(PostKey).child("Likes").setValue(Like);
                                                 Likechecker = false;
 
@@ -139,7 +135,7 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                                                 //int Like=(int)dataSnapshot.child(PostKey).child("Likes").getValue();
                                               int  Like=1;
 
-                                                ratingbarref.child(PostKey).child("Likes").setValue(Like);
+                                                Informationcenterref .child(PostKey).child("Likes").setValue(Like);
                                                // ratingbarref.child(PostKey).child("Likes").setValue(Like);
                                                 Informationcenterref.child(PostKey).child("Likes").setValue(Like);
                                                 Likechecker = false;
@@ -157,17 +153,6 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                             }
                         });
 
-//                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                Intent clickPostIntent = new Intent(InformationCenterViewActivity.this, InformationCenterClickPostActivity.class);
-//                                clickPostIntent.putExtra("PostKey", PostKey);
-//                                startActivity(clickPostIntent);
-//
-//
-//
-//                            }
-//                        });
 
 
                         viewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
@@ -186,191 +171,6 @@ public class InformationCenterViewActivity extends AppCompatActivity {
 
 
 
-//                        viewHolder.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//                            @Override
-//                            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//                                //ratingchecker=true;
-//                                ratingbarref.addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                                       // if(ratingchecker.equals(true))
-//                                        //{
-//                                           // if(ratingchecker.equals(true))
-//                                           // {
-//                                                if(dataSnapshot.child(PostKey).hasChild(currentUserID))
-//                                                {
-//                                                    ratingbarref.child(PostKey).child(currentUserID).setValue(ratingbar.getRating());
-//                                           // ratingchecker = false;
-//                                                }
-//                                                else
-//                                                {
-//                                                    ratingbarref.child(PostKey).child(currentUserID).setValue(ratingbar.getRating());
-//                                                   // ratingchecker = false;
-//
-//                                                }
-//
-//                                           // }
-//
-//                                       // }
-//
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(DatabaseError databaseError) {
-//
-//                                    }
-//                                });
-//
-//                            }
-//                        });
-
-//                     ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//                         @Override
-//                         public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//
-//                             ratingchecker=true;
-//                             ratingbarref.addValueEventListener(new ValueEventListener() {
-//                                 @Override
-//                                 public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                                     if(ratingchecker.equals(true))
-//                                     {
-//                                         if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
-//                                             ratingbarref.child(PostKey).child(currentUserID).setValue(ratingbar.getRating());
-//                                             ratingchecker = false;
-//                                         }
-//                                         else
-//                                         {
-//                                             ratingbarref.child(PostKey).child(currentUserID).setValue(ratingbar.getRating());
-//                                             ratingchecker = false;
-//                                         }
-//                                     }
-//
-//
-//
-//
-//                                 }
-//
-//                                 @Override
-//                                 public void onCancelled(DatabaseError databaseError) {
-//
-//                                 }
-//                             });
-//
-//
-//                             }
-//                     });
-
-
-//                        viewHolder.LikepostButton.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v)
-//                            {
-//                                Likechecker=true;
-//
-//                               ratingbarref.addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(DataSnapshot dataSnapshot)
-//                                    {
-//                                        if(Likechecker.equals(true))
-//                                        {
-//                                            if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
-//                                                LikesRef.child(PostKey).child(currentUserID).removeValue();
-//                                                Likechecker = false;
-//                                            }
-//                                            else
-//                                            {
-//                                                LikesRef.child(PostKey).child(currentUserID).setValue(true);
-//                                                Likechecker = false;
-//                                            }
-//                                        }
-//
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(DatabaseError databaseError) {
-//
-//                                    }
-//                                });
-//                            }
-//                        });
-
-
-
-//                        viewHolder.LikepostButton.setClapListener(new ClapFAB.OnClapListener() {
-//                            @Override
-//                            public void onFabClapped(ClapFAB clapFAB, final int count, boolean b) {
-//
-//                                Likechecker=true;
-//                                ratingbarref.addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                                        if(Likechecker.equals(true))
-//                                        {
-//                                            if (dataSnapshot.child(PostKey).hasChild("Likes")) {
-//                                                ratingbarref.child(PostKey).child("Likes").setValue(count);
-//                                                Likechecker = false;
-//                                            }
-//                                            else
-//                                            {
-//                                                ratingbarref.child(PostKey).child("Likes").setValue(count);
-//                                                Likechecker = false;
-//                                            }
-//                                        }
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(DatabaseError databaseError) {
-//
-//                                    }
-//                                });
-//
-//                            }
-//                        });
-
-
-
-
-
-//                        viewHolder.ratingBar.OnRatingBarChangeListener(new View.OnRatingBarChangeListener() {
-//                            @Override
-//                            public void onClick(View v)
-//                            {
-//                                ratingchecker=true;
-//
-//                             ratingbarref.addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(DataSnapshot dataSnapshot)
-//                                    {
-//                                        if(ratingchecker.equals(true))
-//                                        {
-//                                            if (dataSnapshot.child(PostKey).hasChild(currentUserID)) {
-//                                               ratingbarref.child(PostKey).child(currentUserID).setValue(ratingbar.getRating());
-//                                                ratingchecker = false;
-//                                            }
-//                                            else
-//                                            {
-//                                                ratingbarref.child(PostKey).child(currentUserID).setValue(ratingbar.getRating());
-//                                                ratingchecker = false;
-//                                            }
-//                                        }
-//
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(DatabaseError databaseError) {
-//
-//                                    }
-//                               });
-//                            }
-//                        });
-
-
                     }
                 };
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -386,7 +186,7 @@ public class InformationCenterViewActivity extends AppCompatActivity {
             long  countLikes,countrate;
             float rate;
             String currentUserId;
-            DatabaseReference LikesRef,ratingbarref,ratingbarrefnew;
+            DatabaseReference LikesRef,ratingbarref,ratingbarrefnew,Discussionref;
             RatingBar ratingBar;
 
 
@@ -398,13 +198,9 @@ public class InformationCenterViewActivity extends AppCompatActivity {
            LikepostButton = (ImageButton) mView.findViewById(R.id.like_button);
            CommentPostButton = (ImageButton)mView.findViewById(R.id.comment_button);
                 DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
-//            DisplayNoOfLikes =(TextView)mView.findViewById(R.id.display_no_of_likes);
-              //  ratingBar =(RatingBar) mView.findViewById(R.id.ratingBar);
-//
-//
-////            LikesRef =FirebaseDatabase.getInstance().getReference().child("FarmerLikes");
-//            LikesRef =FirebaseDatabase.getInstance().getReference().child("AgroshopLikes");
-                ratingbarref=FirebaseDatabase.getInstance().getReference().child("DiscussionForumRating");
+
+
+               Discussionref=FirebaseDatabase.getInstance().getReference().child("DiscussionForum");
            currentUserId =FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             }
@@ -412,13 +208,16 @@ public class InformationCenterViewActivity extends AppCompatActivity {
 
             public void setLikeButtonStatus(final String PostKey)
             {
-                ratingbarref.addValueEventListener(new ValueEventListener() {
+                Discussionref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot)
                     {
                         if(dataSnapshot.child(PostKey).hasChild("Likes"))
                         {
-                            countLikes =( long )dataSnapshot.child(PostKey).child("Likes").getValue();
+                        // countLikes = (int) dataSnapshot.child(PostKey).child("Likes").getValue();
+
+                           countLikes= Long.parseLong( dataSnapshot.child(PostKey).child("Likes").getValue().toString()) ;
+
                             LikepostButton.setImageResource(R.drawable.like);
                             DisplayNoOfLikes.setText(Long.toString(countLikes)+(" Likes"));
                         }
@@ -438,105 +237,7 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                 });
 
             }
-//            public void setratingbarStatus(final String PostKey)
-//            {
-//                ratingbarref.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot)
-//                    {
-//                        if(dataSnapshot.child(PostKey).hasChild("Likes"))
-//                        {
-//                            countLikes =(int )dataSnapshot.child(PostKey).child("Likes").getValue();
-//                        //    LikepostButton.setImageResource(R.drawable.like);
-//                            DisplayNoOfLikes.setText(Integer.toString(countLikes)+("Likes"));
-//                        }
-//                        else
-//                        {
-//                            countLikes =(int )dataSnapshot.child(PostKey).child("Likes").getValue();
-//                           // LikepostButton.setImageResource(R.drawable.dislike);
-//                            DisplayNoOfLikes.setText(Integer.toString(countLikes)+("Likes"));
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-//
-//            }
 
-
-//            public void setratingbarStatus(final String PostKey)
-//            {
-//                ratingbarref.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        if(dataSnapshot.child(PostKey).hasChild(currentUserId))
-//                        {
-//
-//                           rate =(float )dataSnapshot.child(PostKey).child(currentUserId).getValue();
-//                           ratingBar.setRating(rate);
-//
-////                            float total=0;
-////                            for(DataSnapshot ds : dataSnapshot.getChildren()) {
-////                                float value = (float)ds.getValue();
-////                                total =+ value;
-////                            }
-////                            countrate =(int )dataSnapshot.child(PostKey).getChildrenCount()-1;
-////                            float Average=total/countrate;
-//                        }
-//                        else
-//                        {
-//
-//                          //  ratingBar.setRating(0);
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-//
-//
-//            }
-
-
-
-
-
-
-//        public void setLikeButtonStatus(final String PostKey)
-//        {
-//            LikesRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot)
-//                {
-//                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
-//                    {
-//                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
-//                        LikepostButton.setImageResource(R.drawable.like);
-//                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
-//                    }
-//                    else
-//                    {
-//                        countLikes =(int )dataSnapshot.child(PostKey).getChildrenCount();
-//                        LikepostButton.setImageResource(R.drawable.dislike);
-//                        DisplayNoOfLikes.setText(Integer.toString(countLikes)+(" Likes"));
-//
-//                    }
-//                }
-//
-            //     @Override
-            //      public void onCancelled(DatabaseError databaseError) {
-
-            //        }
-            //   });
-
-            // }
 
             public void setFullname(String fullname)
             {
@@ -564,29 +265,6 @@ public class InformationCenterViewActivity extends AppCompatActivity {
                 TextView PostDescription = (TextView) mView.findViewById(R.id.post_description);
                 PostDescription.setText(description);
             }
-
-//            public void setPostimage(String postimage)
-//            {
-//                ImageView Postimage =(ImageView) mView.findViewById(R.id.post_image);
-//                Picasso.get().load(postimage).into(Postimage);
-//            }
-//            public void setItem_name(String Item_name)
-//            {
-//                TextView Displayname=(TextView)mView.findViewById(R.id.post_Item_name);
-//                Displayname.setText(Item_name);
-//            }
-//            public void  setPrice(String Price)
-//            {
-//
-//                TextView DisplayPrice=(TextView)mView.findViewById(R.id.Price);
-//                DisplayPrice.setText("Price "+Price);
-//            }
-//            public void setOffers(String Offers)
-//            {
-//                TextView DisplayOffers=(TextView)mView.findViewById(R.id.Offers);
-//                DisplayOffers.setText("Offers "+Offers);
-//            }
-
 
         }
 

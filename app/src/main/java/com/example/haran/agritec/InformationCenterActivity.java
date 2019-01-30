@@ -67,7 +67,7 @@ public class InformationCenterActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("Discussion Forum");
 
         UpdatePostButton.setOnClickListener(new View.OnClickListener() {
             @Override
